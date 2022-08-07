@@ -1,0 +1,8 @@
+node_modules
+dist/
+*.html
+.vscode/
+.husky/
+/src/assets/
+
+*.d.ts
