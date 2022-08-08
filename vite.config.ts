@@ -1,6 +1,8 @@
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import eslint from 'vite-plugin-eslint';
+import Components from 'unplugin-vue-components/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import * as path from 'path';
 
 // https://vitejs.dev/config/
@@ -12,7 +14,20 @@ export default defineConfig(({ mode }) => {
       eslint({
         throwOnError: true,
       }),
+      Components({
+        extensions: ['vue', 'md'],
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+        resolvers: [
+          ElementPlusResolver({
+            importStyle: 'sass',
+          }),
+        ],
+      }),
     ],
+    define: env,
+    server: {
+      open: true,
+    },
     resolve: {
       alias: {
         '@pages': path.resolve(__dirname, 'src/pages'),
@@ -20,9 +35,13 @@ export default defineConfig(({ mode }) => {
         '@utils': path.resolve(__dirname, 'src/utils'),
       },
     },
-    define: env,
-    server: {
-      open: true,
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // eslint-disable-next-line quotes
+          additionalData: `@use './src/styles/element/index.scss' as *;`,
+        },
+      },
     },
   };
 });

@@ -3,35 +3,57 @@
 #### 介绍
 IData-Portal
 
-#### 软件架构
-软件架构说明
-
-
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+##### 环境准备
 
-#### 使用说明
+| 名称 | 版本            | 说明                                                |
+| ---- | --------------- | --------------------------------------------------- |
+| node | v16及以上的版本 | 可以通过命令窗口输入node -v查看版本号，是否安装成功 |
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+##### 项目依赖
 
-#### 参与贡献
+使用npm，安装nodejs，即可使用该命令
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+```
+# NPM
+npm i
+```
 
+使用yarn，需要手动安装
 
-#### 特技
+```
+# 安装yarn
+npm i -g yarn
+# Yarn
+yarn add
+```
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+#### 项目NPM脚本命令使用说明
+
+package.json中script属性就是对应的脚本。
+
+| 脚本命令名称 | 执行命令        | 作用                                       |
+| ------------ | --------------- | ------------------------------------------ |
+| dev          | npm run dev     | 启动本地dev环境                            |
+| build        | npm run build   | 打包前端项目文件，用于发布                 |
+| preview      | npm run preview | 执行build命令后，进行本地预览              |
+| lint         | npm run lint    | 检查项目代码是否符合规范，不需要手动执行。 |
+
+#### 项目目录结构说明
+
+#### 项目页面规范
+
+#### 代码提交规范
+
+| 类型     | 说明                                                      | 备注 |
+| -------- | --------------------------------------------------------- | ---- |
+| feat     | 增加新功能                                                |      |
+| fix      | 修复bug                                                   |      |
+| docs     | 只改动了文档相关的内容                                    |      |
+| style    | 影响代码含义的改动，例如去掉空格、改变缩进、增删分号      |      |
+| build    | 构造工具的或者外部依赖的改动，例如webpack，npm            |      |
+| refactor | 代码重构时使用                                            |      |
+| chore    | 不修改src或者test的其余修改，例如构建过程或辅助工具的变动 |      |
+
+#### 
