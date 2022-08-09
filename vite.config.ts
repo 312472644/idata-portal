@@ -30,6 +30,7 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
+        '@assets': path.resolve(__dirname, 'src/assets'),
         '@pages': path.resolve(__dirname, 'src/pages'),
         '@interface': path.resolve(__dirname, 'src/interface'),
         '@utils': path.resolve(__dirname, 'src/utils'),
@@ -39,7 +40,9 @@ export default defineConfig(({ mode }) => {
       preprocessorOptions: {
         scss: {
           // eslint-disable-next-line quotes
-          additionalData: `@use './src/styles/element/index.scss' as *;`,
+          additionalData: `
+          @use './src/styles/element/index.scss' as *;
+          @use './src/styles/element/var.scss' as *;`,
         },
       },
     },

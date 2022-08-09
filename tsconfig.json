@@ -17,7 +17,8 @@
     "paths": {
       "@pages/*":["./src/pages/*"],
       "@utils/*":["./src/utils/*"],
-      "@interface/*":["./src/interface/*"]
+      "@interface/*":["./src/interface/*"],
+      "@assets/*":["./src/assets/*"]
     },
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
