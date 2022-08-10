@@ -1,10 +1,10 @@
 <template>
-  <div class="base-header-container">
+  <div class="base-header-container fixed-top">
     <div class="logo">
       <img :src="logo" />
       <span class="logo-text">IData</span>
     </div>
-    <div role="operation">
+    <div role="operation" class="operation">
       <ul class="operation-box">
         <li class="operation-item">
           <el-icon color="#8d95a0" class="icon" title="通知" :size="20"><Bell /></el-icon>
@@ -34,13 +34,11 @@
 <script lang="ts" setup>
 import logo from '@assets/icon/logo.svg';
 import avatar from '@assets/avatar.jpg';
-import { ElMessage } from 'element-plus';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const applicationExit = () => {
-  ElMessage({
-    message: 'Congrats, this is a success message.',
-    type: 'success',
-  });
+  router.push('/login');
 };
 </script>
 <style lang="scss">
@@ -52,6 +50,13 @@ const applicationExit = () => {
   height: $base-head-height;
   background-color: #fcfcfc;
   border-bottom: 1px solid #ebecee;
+  &.fixed-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+  }
   .logo {
     display: flex;
     align-items: center;
@@ -65,6 +70,9 @@ const applicationExit = () => {
       font-weight: bold;
       margin-left: 10px;
     }
+  }
+  .operation {
+    padding-right: 5px;
   }
   .operation-box {
     display: flex;

@@ -1,7 +1,5 @@
 <template>
-  <Layout></Layout>
+  <router-view v-slot="{ Component }">
+    <component :is="Component"></component>
+  </router-view>
 </template>
-
-<script setup lang="ts">
-import Layout from './layout/Layout.vue';
-</script>

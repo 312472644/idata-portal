@@ -4,9 +4,13 @@
     <BaseSide></BaseSide>
     <div class="page-content">
       <BaseNav></BaseNav>
-      <Transition mode="out-in">
-        <router-view />
-      </Transition>
+      <router-view v-slot="{ Component }">
+        <transition>
+          <keep-alive>
+            <component :is="Component"></component>
+          </keep-alive>
+        </transition>
+      </router-view>
     </div>
   </main>
 </template>
@@ -18,13 +22,16 @@ import BaseNav from './BaseNav.vue';
 </script>
 <style lang="scss" scoped>
 .main-body {
-  display: flex;
+  padding-top: $base-head-height;
   min-height: calc(100vh - $base-head-height);
 }
 .page-content {
-  height: inherit;
   background: #f2f3f5;
   padding: $content-lr-padding;
-  width: calc(100% - $side-width);
+  position: absolute;
+  left: $side-width;
+  top: $base-head-height;
+  right: 0;
+  bottom: 0;
 }
 </style>

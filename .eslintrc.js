@@ -34,7 +34,7 @@ module.exports = {
     'space-in-parens': 'error',
     'space-infix-ops': 'error',
     'no-trailing-spaces': 'error',
-    'arrow-parens': 'error',
+    'arrow-parens': 'off',
     'no-alert': 'warn',
     'no-debugger': 'warn',
     'prefer-const': 'warn',

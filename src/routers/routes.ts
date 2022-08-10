@@ -1,3 +1,5 @@
+import Layout from '../layout/Layout.vue';
+
 const routes = [
   {
     path: '/',
@@ -6,7 +8,22 @@ const routes = [
   {
     name: 'Home',
     path: '/home',
-    component: () => import('@pages/home/index.vue'),
+    component: Layout,
+    children: [
+      {
+        path: '/home',
+        component: () => import('@pages/home/index.vue'),
+      },
+    ],
+  },
+  {
+    name: 'Login',
+    path: '/login',
+    component: () => import('@pages/login/index.vue'),
+  },
+  {
+    path: '/:pathMatch(.*)',
+    component: () => import('../components/NotFound/index.vue'),
   },
 ];
 

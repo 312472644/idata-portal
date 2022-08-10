@@ -1,9 +1,9 @@
-$theme-colors: (
-  'primary': (
-    'base': #0077fa,
-  ),
-);
+// $theme-colors: (
+//   'primary': (
+//     'base': #0077fa,
+//   ),
+// );
 
-@forward 'element-plus/theme-chalk/src/common/var.scss' with (
-  $colors: $theme-colors
-);
+// @forward 'element-plus/theme-chalk/src/common/var.scss' with (
+//   $colors: $theme-colors
+// );
