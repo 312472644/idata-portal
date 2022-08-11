@@ -1,19 +1,42 @@
 <template>
   <el-scrollbar height="100vh" class="base-side-container fixed-left">
-    <el-menu default-active="2" class="el-menu-vertical-demo">
-      <el-sub-menu index="1">
+    <el-menu
+      :router="true"
+      :default-active="activeMenu"
+      class="el-menu-vertical-demo"
+      v-for="item in menuList"
+      :key="item.path"
+    >
+      <el-sub-menu v-if="!item?.meta?.hidden" :index="item.path">
         <template #title>
-          <el-icon><location /></el-icon>
-          <span>系统管理</span>
+          <el-icon v-if="item?.meta?.icon"><component :is="item?.meta?.icon" /></el-icon>
+          <span>{{ item?.meta?.title }}</span>
         </template>
-        <el-menu-item index="1-1">权限设置</el-menu-item>
-        <el-menu-item index="1-2">规则配置</el-menu-item>
-        <el-menu-item index="1-3">日志追踪</el-menu-item>
+        <el-menu-item :index="subItem.path" v-for="subItem in item.children" :key="subItem.path">
+          {{ subItem?.meta?.title }}
+        </el-menu-item>
       </el-sub-menu>
     </el-menu>
   </el-scrollbar>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { reactive, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import routes from '../routers/routes';
+
+const route = useRoute();
+const menuList = reactive(routes);
+
+const activeMenu = ref<string>('');
+
+watch(
+  route,
+  newValue => {
+    activeMenu.value = newValue.path;
+  },
+  { immediate: true }
+);
+</script>
 <style lang="scss" scoped>
 .base-side-container {
   width: $side-width;

@@ -1,16 +1,17 @@
 <template>
-  <div class="h1">
-    {{ msg }}
-  </div>
+  <div class="h1">useState:{{ stateMap.title }}</div>
+  <el-button @click="change">change</el-button>
 </template>
 <script setup lang="ts">
-import { ref, Ref } from 'vue';
+import { useStore } from 'vuex';
+import { useState } from '../../hooks';
 
-const msg: Ref<string> = ref('Home');
+const store = useStore();
+const stateMap = useState('common', ['title']);
+
+const change = () => {
+  store.commit('changeNavList', '2222');
+};
 </script>
 
-<style lang="scss" scope>
-.h1 {
-  color: #42b983;
-}
-</style>
+<style lang="scss" scope></style>

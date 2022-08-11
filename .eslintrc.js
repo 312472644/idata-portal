@@ -26,7 +26,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     'vue/multi-word-component-names': 'off',
-    'no-console': 'error',
+    'no-console': 'off',
     'semi': 'error',
     'eqeqeq': 'error',
     'quotes': ['error', 'single'],

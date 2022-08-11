@@ -3,4 +3,9 @@ interface IRouter {
   install: (app: any) => void;
 }
 
-export { IRouter };
+interface INav {
+  title: string;
+  path: string;
+}
+
+export { IRouter, INav };

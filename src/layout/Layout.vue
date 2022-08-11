@@ -5,10 +5,10 @@
     <div class="page-content">
       <BaseNav></BaseNav>
       <router-view v-slot="{ Component }">
-        <transition>
-          <keep-alive>
+        <transition mode="in-out">
+          <div>
             <component :is="Component"></component>
-          </keep-alive>
+          </div>
         </transition>
       </router-view>
     </div>
