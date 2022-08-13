@@ -1,6 +1,6 @@
 <template>
   <div class="base-nav-container">
-    <el-breadcrumb :separator-icon="ArrowRight">
+    <el-breadcrumb class="bread-crumb" :separator-icon="ArrowRight">
       <el-breadcrumb-item v-for="item in navList" :key="item" :to="item.path" :replace="true">
         {{ item?.title }}
       </el-breadcrumb-item>
@@ -42,5 +42,17 @@ watch(
   display: flex;
   align-items: center;
   height: 40px;
+}
+.el-breadcrumb {
+  .el-breadcrumb__inner.is-link {
+    font-size: 12px;
+    color: #606266;
+    font-weight: normal;
+  }
+  .el-breadcrumb__item:last-of-type {
+    .is-link {
+      color: #333;
+    }
+  }
 }
 </style>

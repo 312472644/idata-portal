@@ -2,16 +2,14 @@
   <BaseHeader></BaseHeader>
   <main class="main-body">
     <BaseSide></BaseSide>
-    <div class="page-content">
-      <BaseNav></BaseNav>
-      <router-view v-slot="{ Component }">
-        <transition mode="in-out">
-          <div>
-            <component :is="Component"></component>
-          </div>
-        </transition>
-      </router-view>
-    </div>
+    <el-scrollbar>
+      <div class="page-content">
+        <BaseNav></BaseNav>
+        <router-view v-slot="{ Component }">
+          <component :is="Component"></component>
+        </router-view>
+      </div>
+    </el-scrollbar>
   </main>
 </template>
 
@@ -28,10 +26,9 @@ import BaseNav from './BaseNav.vue';
 .page-content {
   background: #f2f3f5;
   padding: $content-lr-padding;
-  position: absolute;
-  left: $side-width;
-  top: $base-head-height;
-  right: 0;
-  bottom: 0;
+  width: calc(100% - $side-width);
+  margin-left: $side-width;
+  min-height: calc(100vh - $base-head-height);
+  min-width: calc($min-screen-width - $side-width);
 }
 </style>

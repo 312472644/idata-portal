@@ -10,7 +10,7 @@
           <el-icon color="#8d95a0" class="icon" title="通知" :size="20"><Bell /></el-icon>
         </li>
         <li class="operation-item">
-          <el-icon color="#8d95a0" class="icon" title="网页全屏" :size="20"><FullScreen /></el-icon>
+          <el-icon color="#8d95a0" class="icon" title="网页全屏" :size="20" @click="fullScreen"><FullScreen /></el-icon>
         </li>
         <li class="operation-item">
           <el-dropdown popper-class="operation-dropdown-popper" trigger="click">
@@ -38,7 +38,17 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const applicationExit = () => {
+  sessionStorage.clear();
+  localStorage.clear();
   router.push('/login');
+};
+
+const fullScreen = () => {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    document.documentElement.requestFullscreen();
+  }
 };
 </script>
 <style lang="scss">

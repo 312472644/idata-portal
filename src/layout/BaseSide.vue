@@ -39,9 +39,12 @@ watch(
 </script>
 <style lang="scss" scoped>
 .base-side-container {
+  float: left;
   width: $side-width;
   height: calc(100vh - $base-head-height);
   border-right: 1px solid #ebecee;
+  background: #fff;
+  z-index: 999;
   &.fixed-left {
     position: fixed;
   }
