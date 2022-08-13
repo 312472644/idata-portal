@@ -40,7 +40,7 @@ watch(
 <style lang="scss" scoped>
 .base-side-container {
   float: left;
-  width: $side-width;
+  width: $side-width !important;
   height: calc(100vh - $base-head-height);
   border-right: 1px solid #ebecee;
   background: #fff;

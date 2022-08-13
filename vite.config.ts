@@ -27,6 +27,12 @@ export default defineConfig(({ mode }) => {
     define: env,
     server: {
       open: true,
+      proxy: {
+        '/services': {
+          target: 'https://api-v2.scoregg.com/',
+          changeOrigin: true,
+        },
+      },
     },
     resolve: {
       alias: {
@@ -41,7 +47,6 @@ export default defineConfig(({ mode }) => {
         scss: {
           // eslint-disable-next-line quotes
           additionalData: `
-          @use './src/styles/element/index.scss' as *;
           @use './src/styles/element/var.scss' as *;`,
         },
       },

@@ -46,7 +46,7 @@ watch(
 .el-breadcrumb {
   .el-breadcrumb__inner.is-link {
     font-size: 12px;
-    color: #606266;
+    color: #a6acb5;
     font-weight: normal;
   }
   .el-breadcrumb__item:last-of-type {

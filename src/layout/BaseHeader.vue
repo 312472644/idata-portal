@@ -55,7 +55,7 @@ const fullScreen = () => {
 .base-header-container {
   display: flex;
   align-items: center;
-  padding: $content-lr-padding;
+  padding: $content-padding-right;
   justify-content: space-between;
   height: $base-head-height;
   background-color: #fcfcfc;
