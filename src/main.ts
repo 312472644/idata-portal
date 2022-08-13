@@ -6,6 +6,7 @@ import install from './components';
 import 'element-plus/theme-chalk/src/message.scss';
 import './styles/index.scss';
 import './styles/root.scss';
+import './styles/reset.scss';
 
 const app = createApp(App);
 install(app);

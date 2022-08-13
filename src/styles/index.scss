@@ -17,6 +17,48 @@ li {
   box-sizing: border-box;
 }
 
+.page-box {
+  padding: 15px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 1px 0 5px #cccc;
+  .search-row {
+    .el-col {
+      display: flex;
+      align-items: center;
+      margin-right: 12px;
+      .label {
+        color: #606266;
+        font-size: 12px;
+        white-space: nowrap;
+        padding-right: 8px;
+      }
+    }
+  }
+  .grid-box {
+    margin-top: 15px;
+  }
+  .pagination {
+    margin-top: 10px;
+    .el-pagination {
+      justify-content: flex-end;
+    }
+  }
+  .grid-operation {
+    margin: 10px 0;
+  }
+  .grid-column-operation {
+    display: flex;
+    align-items: center;
+    .el-link + .el-link {
+      margin-left: 8px;
+    }
+    .el-link__inner {
+      font-size: 12px;
+    }
+  }
+}
+
 ::-webkit-scrollbar {
   width: 5px; //对垂直方向滚动条
   height: 5px; //对水平方向滚动条

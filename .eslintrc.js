@@ -21,6 +21,8 @@ module.exports = {
     '@typescript-eslint'
   ],
   'rules': {
+    'vue/no-v-model-argument': 'off',
+    'vue/no-mutating-props': 'off',
     'vue/no-multiple-template-root': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-explicit-any': 'off',

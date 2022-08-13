@@ -1,0 +1,51 @@
+// element ui样式重写
+.el-button {
+  span {
+    font-size: 12px;
+  }
+}
+
+.el-table {
+  .el-table__header {
+    .el-table__cell {
+      color: #1c2028;
+      background: #f2f3f5;
+    }
+  }
+  .el-table__cell {
+    border-right: none !important;
+  }
+  .el-table__body {
+    .cell {
+      font-size: 12px;
+    }
+  }
+}
+
+.el-overlay {
+  .el-dialog__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 15px;
+    margin-right: 0;
+    border-bottom: 1px solid #f1f1f1;
+    .el-dialog__title {
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .el-dialog__headerbtn {
+      position: relative;
+      width: auto;
+      height: auto;
+    }
+    .el-dialog__close {
+      font-size: 13px;
+    }
+  }
+  .el-dialog__footer {
+    padding: 10px 15px 10px 0;
+    border-top: 1px solid #f1f1f1;
+  }
+}
