@@ -8,4 +8,28 @@ interface INav {
   path: string;
 }
 
-export { IRouter, INav };
+interface IPageVO<T> {
+  pageSize: number;
+  pageNumer: number;
+  total: number;
+  pageCount: number;
+  list: T[]
+}
+
+// 不带分页接口定义
+interface IResult<T> {
+  code: number;
+  data: T;
+  messageW: string;
+  success: boolean;
+}
+
+// 带分页接口定义
+interface IResultPageVO<T extends IPageVO<T>> {
+  code: number;
+  data: T;
+  messageW: string;
+  success: boolean;
+}
+
+export { IRouter, INav, IResult, IResultPageVO };

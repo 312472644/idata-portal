@@ -26,6 +26,7 @@
 </template>
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
+import service from '../../../service';
 import { Plus, Delete } from '@element-plus/icons-vue';
 import permissionDialog from './permissionDialog.vue';
 
@@ -50,12 +51,6 @@ const tableData = [
   },
 ];
 
-const getGridList = () => {
-  loading.value = true;
-  setTimeout(() => {
-    loading.value = false;
-  }, 2000);
-};
 
 const handleDelete = (row: any) => {
   console.log('row', row);
@@ -63,6 +58,12 @@ const handleDelete = (row: any) => {
 
 const showDialog = () => {
   visible.value = true;
+};
+
+const getGridList = () => {
+  service.get('http://120.79.230.22:20112/diBus/test/1').then((res) => {
+    console.log('res', res);
+  });
 };
 
 onMounted(() => {
