@@ -1,8 +1,8 @@
 <template>
-  <div class="page-box">
+  <card>
     <search @search="searchHandle" />
     <grid ref="gridRef" />
-  </div>
+  </card>
 </template>
 <script lang="ts" setup>
 import search from './components/search.vue';

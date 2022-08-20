@@ -1,6 +1,8 @@
+import { App } from '@vue/runtime-dom';
+
 // 路由接口定义
 interface IRouter {
-  install: (app: any) => void;
+  install: (app: App<Element>) => void;
 }
 
 interface INav {
@@ -10,10 +12,10 @@ interface INav {
 
 interface IPageVO<T> {
   pageSize: number;
-  pageNumer: number;
+  pageNumber: number;
   total: number;
   pageCount: number;
-  list: T[]
+  list: T;
 }
 
 // 不带分页接口定义
