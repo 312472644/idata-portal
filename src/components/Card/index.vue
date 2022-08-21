@@ -14,6 +14,6 @@ export default defineComponent({
   padding: 15px;
   background: #fff;
   border-radius: 3px;
-  box-shadow: 1px 0 5px #cccc;
+  box-shadow: 1px 1px 5px #d8dae4;
 }
 </style>

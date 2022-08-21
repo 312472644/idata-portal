@@ -19,13 +19,18 @@ import BaseNav from './BaseNav.vue';
 <style lang="scss" scoped>
 .main-body {
   padding-top: $base-head-height;
+  .base-side-container[data-collapse='true'] + .page-content {
+    margin-left: 65px;
+    width: calc(100% - 65px);
+  }
 }
 .page-content {
-  background: #f2f3f5;
+  background: $page-content-bg-color;
   padding: $content-padding-right;
   width: calc(100% - $side-width);
   margin-left: $side-width;
   min-height: calc(100vh - $base-head-height);
   min-width: calc($min-screen-width - $side-width);
+  transition: all 0.3s linear;
 }
 </style>

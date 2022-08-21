@@ -1,8 +1,8 @@
 <template>
-  <card>
+  <div>
     <search @search="searchHandle" />
     <grid ref="gridRef" />
-  </card>
+  </div>
 </template>
 <script lang="ts" setup>
 import search from './components/search.vue';

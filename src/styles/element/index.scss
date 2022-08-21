@@ -1,9 +1,10 @@
-// $theme-colors: (
-//   'primary': (
-//     'base': #0077fa,
-//   ),
-// );
+$theme-colors: (
+  'primary': (
+    'base': #5473e8,
+  ),
+  'black': #252631,
+);
 
-// @forward 'element-plus/theme-chalk/src/common/var.scss' with (
-//   $colors: $theme-colors
-// );
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: $theme-colors
+);

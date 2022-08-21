@@ -1,10 +1,10 @@
 <template>
-  <div class="grid-box">
+  <card class="grid-box">
     <div class="grid-operation">
       <el-button type="primary" :icon="Plus" @click="showDialog">新增</el-button>
       <el-button type="danger" :icon="Delete">删除</el-button>
     </div>
-    <el-table :data="tableData" border v-loading="loading" element-loading-text="加载中..." style="width: 100%">
+    <el-table :data="tableData" :border="true" v-loading="loading" element-loading-text="加载中..." style="width: 100%">
       <el-table-column type="selection" width="55" />
       <el-table-column prop="date" label="Date" />
       <el-table-column prop="name" label="Name" />
@@ -22,7 +22,7 @@
       <el-pagination small background layout="prev, pager, next" :total="tableData.length" />
     </div>
     <permission-dialog v-model:visible="visible" />
-  </div>
+  </card>
 </template>
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
@@ -51,7 +51,6 @@ const tableData = [
   },
 ];
 
-
 const handleDelete = (row: any) => {
   console.log('row', row);
 };
@@ -61,7 +60,7 @@ const showDialog = () => {
 };
 
 const getGridList = () => {
-  service.get('http://120.79.230.22:20112/diBus/test/1').then((res) => {
+  service.get('http://120.79.230.22:20112/diBus/test/1').then(res => {
     console.log('res', res);
   });
 };

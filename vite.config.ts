@@ -47,6 +47,7 @@ export default defineConfig(({ mode }) => {
         scss: {
           // eslint-disable-next-line quotes
           additionalData: `
+          @use './src/styles/element/index.scss' as *;
           @use './src/styles/element/var.scss' as *;`,
         },
       },
