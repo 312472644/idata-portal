@@ -4,8 +4,8 @@
       :router="true"
       :collapse="stateMap.menuCollapse"
       :default-active="activeMenu"
-      class="el-menu-vertical-demo"
       v-for="item in menuList"
+      :collapse-transition="false"
       :key="item.path"
     >
       <el-sub-menu v-if="!item?.meta?.hidden" :index="item.path">

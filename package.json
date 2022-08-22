@@ -14,13 +14,12 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "element-plus": "^2.2.4",
+    "element-plus": "2.2.14",
     "vue": "^3.0.11",
     "vue-router": "^4.0.15",
     "vuex": "4.0.0"
   },
   "devDependencies": {
-    "nprogress": "^0.2.0",
     "@commitlint/config-conventional": "^17.0.2",
     "@element-plus/icons-vue": "^2.0.6",
     "@types/eslint": "^8.4.2",
@@ -34,6 +33,7 @@
     "husky": "7.0.1",
     "lint-staged": "^13.0.0",
     "node-sass": "^7.0.1",
+    "nprogress": "^0.2.0",
     "prettier": "2.6.2",
     "sass": "^1.52.3",
     "sass-loader": "^13.0.0",
