@@ -17,7 +17,7 @@
   </card>
 </template>
 <script lang="ts" setup>
-import { reactive, defineEmits } from 'vue';
+import { reactive } from 'vue';
 import { IQuery } from '../interface';
 
 const query = reactive<IQuery>({

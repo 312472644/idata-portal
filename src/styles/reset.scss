@@ -30,10 +30,12 @@
     height: 40px;
     padding: 0 15px;
     margin-right: 0;
+    background: #f6f7fc;
     border-bottom: 1px solid $split-line-color;
     .el-dialog__title {
       font-size: 15px;
       font-weight: bold;
+      color: $primary-text-color;
     }
     .el-dialog__headerbtn {
       position: relative;

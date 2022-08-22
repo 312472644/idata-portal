@@ -46,12 +46,12 @@ watch(
 .el-breadcrumb {
   .el-breadcrumb__inner.is-link {
     font-size: 12px;
-    color: #a6acb5;
+    color: $regular-text-color;
     font-weight: normal;
   }
   .el-breadcrumb__item:last-of-type {
     .is-link {
-      color: #333;
+      color: $primary-text-color;
     }
   }
 }
