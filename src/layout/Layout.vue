@@ -5,7 +5,9 @@
     <div class="page-content">
       <BaseNav></BaseNav>
       <router-view v-slot="{ Component }">
-        <component :is="Component"></component>
+        <transition name="fade-transform" mode="out-in">
+          <component :is="Component"></component>
+        </transition>
       </router-view>
     </div>
   </section>

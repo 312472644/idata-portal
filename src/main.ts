@@ -7,6 +7,7 @@ import 'element-plus/theme-chalk/src/message.scss';
 import './styles/index.scss';
 import './styles/root.scss';
 import './styles/reset.scss';
+import './assets/font/iconfont.css';
 
 const app = createApp(App);
 install(app);

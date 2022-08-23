@@ -1,22 +1,17 @@
 <template>
   <el-scrollbar :data-collapse="stateMap.menuCollapse" :style="getSideWidth" class="base-side-container fixed-left">
-    <el-menu
-      :router="true"
-      :collapse="stateMap.menuCollapse"
-      :default-active="activeMenu"
-      v-for="item in menuList"
-      :collapse-transition="false"
-      :key="item.path"
-    >
-      <el-sub-menu v-if="!item?.meta?.hidden" :index="item.path">
-        <template #title>
-          <el-icon v-if="item?.meta?.icon"><component :is="item?.meta?.icon" /></el-icon>
-          <span>{{ item?.meta?.title }}</span>
-        </template>
-        <el-menu-item :index="subItem.path" v-for="subItem in item.children" :key="subItem.path">
-          {{ subItem?.meta?.title }}
-        </el-menu-item>
-      </el-sub-menu>
+    <el-menu :router="true" :collapse="stateMap.menuCollapse" :default-active="activeMenu">
+      <div v-for="item in menuList" :key="item.path">
+        <el-sub-menu v-if="!item?.meta?.hidden" :index="item.path">
+          <template #title>
+            <span :class="['iconfont', item?.meta?.icon]"></span>
+            <span>{{ item?.meta?.title }}</span>
+          </template>
+          <el-menu-item :index="subItem.path" v-for="subItem in item.children" :key="subItem.path">
+            {{ subItem?.meta?.title }}
+          </el-menu-item>
+        </el-sub-menu>
+      </div>
     </el-menu>
   </el-scrollbar>
 </template>
