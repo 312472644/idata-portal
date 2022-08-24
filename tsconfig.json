@@ -18,7 +18,8 @@
       "@pages/*":["./src/pages/*"],
       "@utils/*":["./src/utils/*"],
       "@interface/*":["./src/interface/*"],
-      "@assets/*":["./src/assets/*"]
+      "@assets/*":["./src/assets/*"],
+      "@service/*":["./src/service"]
     },
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

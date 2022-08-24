@@ -26,7 +26,7 @@
 </template>
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
-import service from '../../../service';
+import service from '@service/index';
 import { Plus, Delete } from '@element-plus/icons-vue';
 import permissionDialog from './permissionDialog.vue';
 

@@ -4,8 +4,8 @@
       <div v-for="item in menuList" :key="item.path">
         <el-sub-menu v-if="!item?.meta?.hidden" :index="item.path">
           <template #title>
-            <span :class="['iconfont', item?.meta?.icon]"></span>
-            <span>{{ item?.meta?.title }}</span>
+            <span :class="['icon', 'iconfont', item?.meta?.icon]"></span>
+            <span class="menu-title">{{ item?.meta?.title }}</span>
           </template>
           <el-menu-item :index="subItem.path" v-for="subItem in item.children" :key="subItem.path">
             {{ subItem?.meta?.title }}
@@ -23,7 +23,6 @@ import routes from '../routers/routes';
 
 const route = useRoute();
 const stateMap = useState('common', ['menuCollapse']);
-3;
 
 const menuList = reactive(routes);
 const activeMenu = ref<string>('');
@@ -67,10 +66,29 @@ const getSideWidth = computed(() => {
       background-color: unset;
     }
   }
-  ::v-deep .el-sub-menu.is-active {
+  :deep .el-sub-menu.is-active {
     .el-sub-menu__title {
       color: #fff;
     }
+  }
+  .menu-title {
+    margin-left: 10px;
+  }
+  &[data-collapse='true'] {
+    :deep .el-sub-menu__icon-arrow {
+      display: none;
+    }
+    :deep .menu-title {
+      overflow: hidden;
+    }
+  }
+  &[data-collapse='false'] {
+    :deep .menu-title {
+      overflow: auto;
+    }
+  }
+  :deep .el-sub-menu .el-menu {
+    background-color: #373d58;
   }
 }
 </style>

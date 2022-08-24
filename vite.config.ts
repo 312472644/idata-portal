@@ -40,6 +40,7 @@ export default defineConfig(({ mode }) => {
         '@pages': path.resolve(__dirname, 'src/pages'),
         '@interface': path.resolve(__dirname, 'src/interface'),
         '@utils': path.resolve(__dirname, 'src/utils'),
+        '@service': path.resolve(__dirname, 'src/service'),
       },
     },
     css: {
