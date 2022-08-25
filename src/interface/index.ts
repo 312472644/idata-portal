@@ -34,4 +34,13 @@ interface IResultPageVO<T extends IPageVO<T>> {
   success: boolean;
 }
 
-export { IRouter, INav, IResult, IResultPageVO };
+// 每个表共有部分
+interface ITableCommon {
+  createdBy: string; //创建人
+  createdDate: string; // 创建时间
+  updatedBy: string; // 更新人
+  updatedDate: string; // 更新时间
+  lastUpdatedDate: string; // 最后更新时间
+}
+
+export { IRouter, INav, IResult, IResultPageVO, ITableCommon };
