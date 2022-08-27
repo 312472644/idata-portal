@@ -3,14 +3,17 @@
     <div class="login-warp">
       <el-form size="large" ref="ruleFormRef" :model="loginForm" :rules="rules">
         <h3 class="title">用户登录</h3>
-        <el-form-item prop="userAccount">
-          <el-input placeholder="账号" v-model="loginForm.userAccount" />
+        <el-form-item prop="userName">
+          <el-input placeholder="账号" v-model="loginForm.userName" />
         </el-form-item>
-        <el-form-item prop="userPassword">
-          <el-input placeholder="密码" type="password" v-model="loginForm.userPassword" />
+        <el-form-item prop="password">
+          <el-input placeholder="密码" type="password" v-model="loginForm.password" />
         </el-form-item>
         <el-form-item>
-          <el-checkbox label="记住密码" size="large" />
+          <div class="form-item-tools">
+            <el-checkbox v-model="isChecked" label="记住密码" size="large" />
+            <el-link :underline="false" type="primary" @click="toRegister">账号注册</el-link>
+          </div>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" auto-insert-space class="btn-login" @click="login">登录</el-button>
@@ -20,29 +23,82 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import type { FormInstance, FormRules } from 'element-plus';
 
+import { loginAPI } from '../../api';
+import { getUrlParams } from '@utils/index';
+
 const router = useRouter();
 const ruleFormRef = ref<FormInstance>();
+const isChecked = ref(false);
 const loginForm = reactive({
-  userAccount: '',
-  userPassword: '',
+  userName: '',
+  password: '',
 });
 
 const rules = reactive<FormRules>({
-  userAccount: [{ required: true, message: '请输入账号', trigger: 'blur' }],
-  userPassword: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+  userName: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+  password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
 });
 
-const login = async () => {
-  await ruleFormRef.value?.validate(valid => {
+const setCacheLoginInfo = () => {
+  if (isChecked.value) {
+    const loginInfo = {
+      ...loginForm,
+      checked: isChecked.value,
+    };
+    localStorage.setItem('loginInfo', JSON.stringify(loginInfo));
+  } else {
+    localStorage.removeItem('loginInfo');
+  }
+};
+
+const getCacheLoginInfo = () => {
+  const cacheLoginInfo = localStorage.getItem('loginInfo');
+  if (cacheLoginInfo) {
+    const loginInfo = JSON.parse(cacheLoginInfo);
+    const { password, userName, checked } = loginInfo;
+    loginForm.password = password;
+    loginForm.userName = userName;
+    isChecked.value = checked;
+  }
+};
+
+const toMainPage = () => {
+  if (location.href.indexOf('referrer') > -1) {
+    const referrer = getUrlParams('referrer');
+    if (referrer) {
+      location.href = decodeURIComponent(referrer);
+    }
+  } else {
+    router.push('/');
+  }
+};
+
+const login = () => {
+  ruleFormRef.value?.validate(valid => {
     if (valid) {
-      router.push('/');
+      loginAPI(loginForm).then(res => {
+        const { code, data } = res.data;
+        if (code === 200) {
+          sessionStorage.setItem('token', JSON.stringify(data.token));
+          setCacheLoginInfo();
+          toMainPage();
+        }
+      });
     }
   });
 };
+
+const toRegister = () => {
+  router.push('/register');
+};
+
+onMounted(() => {
+  getCacheLoginInfo();
+});
 </script>
 <style lang="scss" scoped>
 .login-container {
@@ -68,6 +124,13 @@ const login = async () => {
   }
   .btn-login {
     width: 100%;
+  }
+
+  .form-item-tools {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 </style>

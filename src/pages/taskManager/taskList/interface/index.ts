@@ -2,7 +2,7 @@ import { ITableCommon } from '@interface/index';
 
 export interface ITask extends ITableCommon {
   id: number;
-  taskName: string; //
+  taskName: string;
   taskStatus: string;
   executePlan: string; // 执行计划(corn表达式) 或者下拉 多少分钟一次
   startReadDataTime: string; // 开始读取数据时间 yyyy-MM-dd HH:mm:ss

@@ -3,7 +3,7 @@ import Router from './routers';
 import App from './App.vue';
 import store from './store';
 import install from './components';
-import 'element-plus/theme-chalk/src/message.scss';
+import 'element-plus/theme-chalk/src/index.scss';
 import './styles/index.scss';
 import './styles/root.scss';
 import './styles/reset.scss';

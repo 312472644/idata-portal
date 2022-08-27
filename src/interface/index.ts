@@ -22,7 +22,7 @@ interface IPageVO<T> {
 interface IResult<T> {
   code: number;
   data: T;
-  messageW: string;
+  message: string;
   success: boolean;
 }
 

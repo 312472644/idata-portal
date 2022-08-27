@@ -22,6 +22,7 @@
           <el-dropdown popper-class="operation-dropdown-popper" trigger="click">
             <span class="el-dropdown-link">
               <img :src="avatar" class="avatar" />
+              <span class="avatar-user" :title="userInfo?.userName">{{ userInfo?.userName }}</span>
               <el-icon class="el-icon--right">
                 <arrow-down />
               </el-icon>
@@ -43,17 +44,18 @@ import avatar from '@assets/avatar.jpg';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { useState } from '../hooks';
-import { computed, ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
+import { geCachetUserInfo } from '@utils/index';
 
 const router = useRouter();
 const store = useStore();
 const stateMap = useState('common', ['menuCollapse']);
 const dyStyle = ref<string>('');
+const userInfo = reactive(geCachetUserInfo());
 const iconCollapse = ref<boolean>(false);
 
 const applicationExit = () => {
   sessionStorage.clear();
-  localStorage.clear();
   router.push('/login');
 };
 
@@ -149,6 +151,14 @@ const getSideWidth = computed(() => {
     left: 225px;
     cursor: pointer;
     transition: left 0.3s linear;
+  }
+  .avatar-user {
+    display: inline-block;
+    padding: 0 5px;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 .operation-dropdown-popper {

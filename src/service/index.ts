@@ -1,17 +1,16 @@
 import axios, { AxiosRequestHeaders } from 'axios';
+import { ElMessage, ElMessageBox } from 'element-plus';
 
 const service = axios.create({
-  baseURL: '/',
+  baseURL: 'http://120.79.230.22:20112/diBus',
   timeout: 3000,
   withCredentials: true,
-  // headers: {
-  //   token: JSON.parse(localStorage.getItem('token') || ''),
-  // },
 });
 
 service.interceptors.request.use(
   config => {
-    (config.headers as AxiosRequestHeaders)['token'] = 123;
+    const token = sessionStorage.getItem('token');
+    (config.headers as AxiosRequestHeaders)['token'] = token ? JSON.parse(token) : '';
     // 在发送请求之前做些什么
     return config;
   },
@@ -23,13 +22,20 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
-    // 2xx 范围内的状态码都会触发该函数。
-    // 对响应数据做点什么
+    const { code, message } = response.data;
+    if (code !== 200) {
+      ElMessageBox.alert(message, '错误', {
+        type: 'error',
+        confirmButtonText: '确定',
+      });
+    }
     return response;
   },
   error => {
-    // 超出 2xx 范围的状态码都会触发该函数。
-    // 对响应错误做点什么
+    ElMessage({
+      message: '请求错误~',
+      type: 'error',
+    });
     return Promise.reject(error);
   }
 );

@@ -96,6 +96,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@pages/login/index.vue'),
   },
   {
+    name: 'Register',
+    path: '/register',
+    meta: { hidden: true },
+    component: () => import('@pages/register/index.vue'),
+  },
+  {
     path: '/:pathMatch(.*)',
     meta: { hidden: true },
     component: () => import('../components/NotFound/index.vue'),
