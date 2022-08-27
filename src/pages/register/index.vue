@@ -21,11 +21,8 @@
 </template>
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
-// import { useRouter } from 'vue-router';
-import type { FormInstance } from 'element-plus';
-import { ElMessage } from 'element-plus';
+import { ElMessage, FormInstance } from 'element-plus';
 import { registerAPI } from '../../api';
-// const router = useRouter();
 
 const ruleFormRef = ref<FormInstance>();
 const registerForm = reactive({

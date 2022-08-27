@@ -2,7 +2,7 @@ import axios, { AxiosRequestHeaders } from 'axios';
 import { ElMessage, ElMessageBox } from 'element-plus';
 
 const service = axios.create({
-  baseURL: 'http://120.79.230.22:20112/diBus',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   timeout: 3000,
   withCredentials: true,
 });
@@ -10,12 +10,12 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     const token = sessionStorage.getItem('token');
+    const userInfo = localStorage.getItem('loginInfo');
     (config.headers as AxiosRequestHeaders)['token'] = token ? JSON.parse(token) : '';
-    // 在发送请求之前做些什么
+    (config.headers as AxiosRequestHeaders)['user'] = userInfo ? JSON.parse(userInfo)?.userName : '';
     return config;
   },
   error => {
-    // 对请求错误做些什么
     return Promise.reject(error);
   }
 );

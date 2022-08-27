@@ -60,9 +60,17 @@ const showDialog = () => {
 };
 
 const getGridList = () => {
-  service.get('http://120.79.230.22:20112/diBus/test/1').then(res => {
-    console.log('res', res);
-  });
+  service
+    .post('/userinfo/list/page', {
+      search: {},
+      page: {
+        pageSize: 1,
+        pageNumber: 10,
+      },
+    })
+    .then(res => {
+      console.log('res', res);
+    });
 };
 
 onMounted(() => {
