@@ -17,6 +17,7 @@ const redirectLogin = (code: number, message: string) => {
 const interceptResponse = (response: AxiosResponse<any, any>) => {
   const { code, message } = response.data;
   if (code !== 200) {
+    console.error('错误消息', message);
     redirectLogin(code, message);
   }
   return response;

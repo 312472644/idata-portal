@@ -23,14 +23,16 @@
 import { reactive, ref } from 'vue';
 import { ElMessage, FormInstance } from 'element-plus';
 import { registerAPI } from '../../api';
+import { userLogin } from '@utils/business';
+import { useRouter } from 'vue-router';
 
 const ruleFormRef = ref<FormInstance>();
+const router = useRouter();
 const registerForm = reactive({
   userName: '',
   password: '',
   checkPassword: '',
 });
-
 const validatePass = (rule: any, value: any, callback: any) => {
   if (value === '') {
     callback(new Error('请输入密码'));
@@ -66,13 +68,19 @@ const register = () => {
         password: registerForm.password,
       };
       registerAPI(params).then(res => {
-        const { code, data } = res.data;
+        const { code } = res.data;
         if (code === 200) {
           ElMessage({
-            message: '注册成功',
+            dangerouslyUseHTMLString: true,
+            message: '<span>用户注册成功，<span>3</span>秒后自动登录</span>',
             type: 'success',
+            duration: 3000,
           });
-          sessionStorage.setItem('token', JSON.stringify(data.token));
+          setTimeout(() => {
+            userLogin(params).then(() => {
+              router.push('/');
+            });
+          }, 3000);
         }
       });
     }

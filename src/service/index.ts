@@ -11,9 +11,9 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     const token = sessionStorage.getItem('token');
-    const userInfo = localStorage.getItem('loginInfo');
+    const userName = sessionStorage.getItem('userName');
     (config.headers as AxiosRequestHeaders)['token'] = token ? JSON.parse(token) : '';
-    (config.headers as AxiosRequestHeaders)['user'] = userInfo ? JSON.parse(userInfo)?.userName : '';
+    (config.headers as AxiosRequestHeaders)['user'] = userName ? JSON.parse(userName) : '';
     return config;
   },
   error => {

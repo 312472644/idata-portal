@@ -26,9 +26,8 @@
 import { reactive, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import type { FormInstance, FormRules } from 'element-plus';
-
-import { loginAPI } from '../../api';
 import { getUrlParams } from '@utils/index';
+import { userLogin } from '@utils/business';
 
 const router = useRouter();
 const ruleFormRef = ref<FormInstance>();
@@ -80,13 +79,9 @@ const toMainPage = () => {
 const login = () => {
   ruleFormRef.value?.validate(valid => {
     if (valid) {
-      loginAPI(loginForm).then(res => {
-        const { code, data } = res.data;
-        if (code === 200) {
-          sessionStorage.setItem('token', JSON.stringify(data.token));
-          setCacheLoginInfo();
-          toMainPage();
-        }
+      userLogin(loginForm).then(() => {
+        setCacheLoginInfo();
+        toMainPage();
       });
     }
   });
