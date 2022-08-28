@@ -1,5 +1,6 @@
 import axios, { AxiosRequestHeaders } from 'axios';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import { ElMessage } from 'element-plus';
+import { interceptResponse } from './interceptor';
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -22,14 +23,7 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
-    const { code, message } = response.data;
-    if (code !== 200) {
-      ElMessageBox.alert(message, '错误', {
-        type: 'error',
-        confirmButtonText: '确定',
-      });
-    }
-    return response;
+    return interceptResponse(response);
   },
   error => {
     ElMessage({

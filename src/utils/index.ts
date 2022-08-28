@@ -1,3 +1,7 @@
+import { markRaw } from 'vue';
+import { ElMessageBox, ElMessageBoxOptions } from 'element-plus';
+import { QuestionFilled } from '@element-plus/icons-vue';
+
 /**
  * 获取url请求参数
  *
@@ -26,4 +30,31 @@ const geCachetUserInfo = () => {
   }
   return {};
 };
-export { getUrlParams, geCachetUserInfo };
+
+/**
+ *
+ * 确认框
+ * @param {string} message
+ * @param {ElMessageBoxOptions} options
+ * @return {*}
+ */
+const confirmMessageBox = (message: string, options?: ElMessageBoxOptions) => {
+  return ElMessageBox.confirm(message, '提示', {
+    ...options,
+    type: 'warning',
+    cancelButtonText: '取消',
+    confirmButtonText: '确认',
+    icon: markRaw(QuestionFilled),
+  });
+};
+
+/**
+ * 原生页面跳转
+ *
+ * @param {string} url
+ */
+const nativePageJump = (url: string) => {
+  const origin = location.origin;
+  window.location.href = `${origin}/#/${url}`;
+};
+export { getUrlParams, geCachetUserInfo, confirmMessageBox, nativePageJump };

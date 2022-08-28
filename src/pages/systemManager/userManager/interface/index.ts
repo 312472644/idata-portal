@@ -1,10 +1,7 @@
 import { ITableCommon } from '@interface/index';
 
-export interface IQuery {
-  roleName?: string;
-  permissionName?: string;
-  pageIndex: number;
-  pageSize: number;
+export interface IUserQuery {
+  userName: string;
 }
 
 export interface IUser extends ITableCommon {

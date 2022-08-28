@@ -5,16 +5,32 @@ interface IRouter {
   install: (app: App<Element>) => void;
 }
 
+// 面包屑接口
 interface INav {
   title: string;
   path: string;
+}
+
+// 分页组件参数
+interface IPagination {
+  pageSize: number;
+  pageNumber: number;
+  total?: number;
+}
+
+// 查询条件
+interface IQuery<T> {
+  search: T;
+  page?: {
+    pageSize: number;
+    pageNumber: number;
+  };
 }
 
 interface IPageVO<T> {
   pageSize: number;
   pageNumber: number;
   total: number;
-  pageCount: number;
   list: T;
 }
 
@@ -27,10 +43,15 @@ interface IResult<T> {
 }
 
 // 带分页接口定义
-interface IResultPageVO<T extends IPageVO<T>> {
+interface IResultPageVO<T> {
   code: number;
-  data: T;
-  messageW: string;
+  data: {
+    list: T[];
+    pageSize?: number;
+    pageNumber?: number;
+    total?: number;
+  };
+  message: string | null;
   success: boolean;
 }
 
@@ -43,4 +64,4 @@ interface ITableCommon {
   lastUpdatedDate: string; // 最后更新时间
 }
 
-export { IRouter, INav, IResult, IResultPageVO, ITableCommon };
+export { IRouter, INav, IResult, IResultPageVO, ITableCommon, IPagination, IQuery, IPageVO };

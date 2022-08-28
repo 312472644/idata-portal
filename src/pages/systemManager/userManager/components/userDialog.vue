@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="visible" title="新增权限" width="30%" :close-on-click-modal="false" @close="cancel">
+  <el-dialog v-model="visible" title="编辑用户" width="30%" :close-on-click-modal="false" @close="cancel">
     <span>This is a message</span>
     <template #footer>
       <span class="dialog-footer">

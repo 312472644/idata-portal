@@ -43,6 +43,7 @@ module.exports = {
     'no-dupe-keys': 'error',
     'no-dupe-args': 'error',
     'no-unused-vars': 'off',
+    '@typescript-eslint/ban-types': 'off',
     'no-duplicate-imports': [
       1,
       {

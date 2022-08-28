@@ -23,7 +23,8 @@
 }
 
 .el-overlay {
-  .el-dialog__header {
+  .el-dialog__header,
+  .el-message-box__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -32,7 +33,9 @@
     margin-right: 0;
     background: #f6f7fc;
     border-bottom: 1px solid $split-line-color;
-    .el-dialog__title {
+    border-radius: 3px;
+    .el-dialog__title,
+    .el-message-box__title {
       font-size: 15px;
       font-weight: bold;
       color: $primary-text-color;
@@ -41,8 +44,13 @@
       position: relative;
       width: auto;
       height: auto;
+      top: 0;
     }
-    .el-dialog__close {
+    .el-message-box__headerbtn {
+      top: 12px;
+    }
+    .el-dialog__close,
+    .el-message-box__close {
       font-size: 13px;
     }
   }
