@@ -1,8 +1,10 @@
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import { App } from '@vue/runtime-dom';
+import Card from './Card/index.vue';
 
 const componentMap = {
   ...ElementPlusIconsVue,
+  Card: Card,
 };
 
 // 注册所有组件

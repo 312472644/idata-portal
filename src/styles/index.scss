@@ -2,6 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial,
+    sans-serif;
 }
 
 ul,
@@ -13,4 +15,70 @@ li {
 
 * {
   box-sizing: border-box;
+}
+
+.search-row {
+  .el-col {
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+    .label {
+      color: $primary-text-color;
+      font-size: 12px;
+      white-space: nowrap;
+      padding-right: 8px;
+    }
+  }
+}
+.grid-box {
+  margin-top: 15px;
+}
+.pagination {
+  margin-top: 10px;
+  .el-pagination {
+    justify-content: flex-end;
+  }
+}
+.grid-operation {
+  margin: 10px 0;
+}
+.grid-column-operation {
+  display: flex;
+  align-items: center;
+  .el-link + .el-link {
+    margin-left: 8px;
+  }
+  .el-link__inner {
+    font-size: 12px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px; //对垂直方向滚动条
+  height: 5px; //对水平方向滚动条
+}
+//滚动的滑块
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #ccc//滚动条的颜色;
+}
+//内层滚动槽
+::-webkit-scrollbar-track-piece {
+  background-color: #fff;
+}
+
+/* fade-transform */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all 0.5s;
+}
+
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-15px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(15px);
 }
