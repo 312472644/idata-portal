@@ -4,7 +4,7 @@
       <el-row class="search-row">
         <el-col class="el-col" :span="6">
           <span class="label">用户名</span>
-          <el-input v-model="query.search.userName" placeholder="请输入"></el-input>
+          <el-input v-model="userName" placeholder="请输入"></el-input>
         </el-col>
         <el-col class="el-col" :span="6">
           <el-button type="primary" @click="getUserList(1)">查询</el-button>
@@ -13,13 +13,7 @@
       </el-row>
     </card>
     <card class="grid-box">
-      <el-table
-        :data="userList"
-        :border="true"
-        v-loading="loading"
-        element-loading-text="加载中..."
-        style="width: 100%"
-      >
+      <el-table :data="userList" key="id" :border="true" v-loading="loading" element-loading-text="加载中...">
         <el-table-column type="selection" width="55" />
         <el-table-column prop="userName" label="用户名" />
         <el-table-column prop="secretKey" label="密钥" />
@@ -37,7 +31,17 @@
         </el-table-column>
       </el-table>
       <div class="pagination">
-        <el-pagination layout="total, sizes, prev, pager, next" small background :total="pageVO.total" />
+        <el-pagination
+          layout="total, sizes, prev, pager, next"
+          small
+          background
+          :currentPage="pageVO.pageNumber"
+          :page-size="pageVO.pageSize"
+          :page-sizes="[10, 20, 50, 100]"
+          :total="pageVO.total"
+          @current-change="currentChange"
+          @size-change="sizeChange"
+        />
       </div>
     </card>
     <!--用户编辑弹框-->
@@ -56,20 +60,25 @@ import { confirmMessageBox } from '@utils/index';
 const visible = ref(false);
 const loading = ref(false);
 const userList = ref<IUser[]>([]);
+const userName = ref('');
 const pageVO = reactive<IPagination>({
   pageNumber: 1,
   pageSize: 10,
   total: 0,
 });
-const query = reactive<IQuery<IUserQuery>>({
-  search: {
-    userName: '',
-  },
-  page: {
-    pageNumber: pageVO.pageNumber,
-    pageSize: pageVO.pageSize,
-  },
-});
+
+const getQueryParam = (): IQuery<IUserQuery> => {
+  const { pageSize, pageNumber } = pageVO;
+  return {
+    condition: {
+      userName: userName.value,
+    },
+    page: {
+      pageNumber,
+      pageSize,
+    },
+  };
+};
 
 const deleteUser = (row: IUser) => {
   confirmMessageBox(`确认删除用户：${row.userName}？`).then(() => {
@@ -79,6 +88,7 @@ const deleteUser = (row: IUser) => {
         ElMessage.success({
           message: '删除成功！',
         });
+        getUserList(1);
       }
     });
   });
@@ -91,7 +101,7 @@ const showDialog = () => {
 const getUserList = (pageNumber?: number) => {
   loading.value = true;
   pageVO.pageNumber = pageNumber || pageVO.pageNumber;
-  getUserListAPI(query)
+  getUserListAPI(getQueryParam())
     .then(res => {
       const { data } = res.data;
       userList.value = data.list;
@@ -102,8 +112,18 @@ const getUserList = (pageNumber?: number) => {
     });
 };
 
+const currentChange = (pageNumber: number) => {
+  pageVO.pageNumber = pageNumber;
+  getUserList();
+};
+
+const sizeChange = (pageSize: number) => {
+  pageVO.pageSize = pageSize;
+  getUserList(1);
+};
+
 const resetQuery = () => {
-  query.search.userName = '';
+  userName.value = '';
   pageVO.pageNumber = 1;
   getUserList(1);
 };

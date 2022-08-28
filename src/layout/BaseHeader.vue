@@ -44,13 +44,13 @@ import avatar from '@assets/avatar.jpg';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { useState } from '../hooks';
-import { computed, reactive, ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const router = useRouter();
 const store = useStore();
 const stateMap = useState('common', ['menuCollapse']);
 const dyStyle = ref<string>('');
-const userName = reactive(JSON.parse(sessionStorage.getItem('userName') || ''));
+const userName = ref(JSON.parse(sessionStorage.getItem('userName') || ''));
 const iconCollapse = ref<boolean>(false);
 
 const applicationExit = () => {

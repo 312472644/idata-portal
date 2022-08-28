@@ -20,7 +20,7 @@ interface IPagination {
 
 // 查询条件
 interface IQuery<T> {
-  search: T;
+  condition: T;
   page?: {
     pageSize: number;
     pageNumber: number;

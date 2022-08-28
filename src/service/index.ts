@@ -1,6 +1,16 @@
 import axios, { AxiosRequestHeaders } from 'axios';
 import { ElMessage } from 'element-plus';
 import { interceptResponse } from './interceptor';
+import JsonBig from 'json-bigint';
+
+axios.defaults.transformResponse = [
+  data => {
+    // JSON.parse精度丢失的问题
+    const json = JsonBig({ storeAsString: true });
+    const responseData = json.parse(data);
+    return responseData;
+  },
+];
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -8,6 +18,7 @@ const service = axios.create({
   withCredentials: true,
 });
 
+// 拦截请求
 service.interceptors.request.use(
   config => {
     const token = sessionStorage.getItem('token');
@@ -21,6 +32,7 @@ service.interceptors.request.use(
   }
 );
 
+// 拦截返回响应
 service.interceptors.response.use(
   response => {
     return interceptResponse(response);
