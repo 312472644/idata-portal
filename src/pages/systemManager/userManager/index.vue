@@ -7,13 +7,13 @@
           <el-input v-model="userName" placeholder="请输入"></el-input>
         </el-col>
         <el-col class="el-col" :span="6">
-          <el-button type="primary" @click="getUserList(1)">查询</el-button>
+          <el-button type="primary" @click="getDataList(1, { userName: userName })">查询</el-button>
           <el-button @click="resetQuery">重置</el-button>
         </el-col>
       </el-row>
     </card>
     <card class="grid-box">
-      <el-table :data="userList" key="id" :border="true" v-loading="loading" element-loading-text="加载中...">
+      <el-table :data="dataList" key="id" :border="true" v-loading="loading" element-loading-text="加载中...">
         <el-table-column type="selection" width="55" />
         <el-table-column prop="userName" label="用户名" />
         <el-table-column prop="secretKey" label="密钥" />
@@ -24,7 +24,7 @@
         <el-table-column width="120">
           <template #default="scope">
             <div class="grid-column-operation">
-              <el-link type="primary" :underline="false" @click="showDialog">编辑</el-link>
+              <el-link type="primary" :underline="false" @click="showDialog(scope.row)">编辑</el-link>
               <el-link type="danger" :underline="false" @click="deleteUser(scope.row)">删除</el-link>
             </div>
           </template>
@@ -45,40 +45,22 @@
       </div>
     </card>
     <!--用户编辑弹框-->
-    <user-dialog v-model:visible="visible" />
+    <user-dialog v-model:visible="visible" :current-row="currentRow" />
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted, reactive } from 'vue';
+import { ref, onMounted } from 'vue';
 import userDialog from './components/userDialog.vue';
 import { ElMessage } from 'element-plus';
-import { IPagination, IQuery } from '@interface/index';
-import { IUser, IUserQuery } from './interface';
+import { IUser } from './interface';
 import { getUserListAPI, deleteUserAPI } from './api';
 import { confirmMessageBox } from '@utils/index';
+import { usePageQuery } from '../../../hooks';
 
 const visible = ref(false);
-const loading = ref(false);
-const userList = ref<IUser[]>([]);
+const currentRow = ref<IUser>({} as IUser);
 const userName = ref('');
-const pageVO = reactive<IPagination>({
-  pageNumber: 1,
-  pageSize: 10,
-  total: 0,
-});
-
-const getQueryParam = (): IQuery<IUserQuery> => {
-  const { pageSize, pageNumber } = pageVO;
-  return {
-    condition: {
-      userName: userName.value,
-    },
-    page: {
-      pageNumber,
-      pageSize,
-    },
-  };
-};
+const { loading, pageVO, dataList, getDataList, currentChange, sizeChange } = usePageQuery<IUser>(getUserListAPI);
 
 const deleteUser = (row: IUser) => {
   confirmMessageBox(`确认删除用户：${row.userName}？`).then(() => {
@@ -88,47 +70,24 @@ const deleteUser = (row: IUser) => {
         ElMessage.success({
           message: '删除成功！',
         });
-        getUserList(1);
+        getDataList();
       }
     });
   });
 };
 
-const showDialog = () => {
+const showDialog = (row: IUser) => {
   visible.value = true;
-};
-
-const getUserList = (pageNumber?: number) => {
-  loading.value = true;
-  pageVO.pageNumber = pageNumber || pageVO.pageNumber;
-  getUserListAPI(getQueryParam())
-    .then(res => {
-      const { data } = res.data;
-      userList.value = data.list;
-      pageVO.total = data.total;
-    })
-    .finally(() => {
-      loading.value = false;
-    });
-};
-
-const currentChange = (pageNumber: number) => {
-  pageVO.pageNumber = pageNumber;
-  getUserList();
-};
-
-const sizeChange = (pageSize: number) => {
-  pageVO.pageSize = pageSize;
-  getUserList(1);
+  currentRow.value = row;
 };
 
 const resetQuery = () => {
   userName.value = '';
   pageVO.pageNumber = 1;
-  getUserList(1);
+  getDataList(1);
 };
 
 onMounted(() => {
-  getUserList();
+  getDataList(1, { userName: userName.value });
 });
 </script>

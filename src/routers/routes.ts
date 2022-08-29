@@ -57,7 +57,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: '/systemConfig/globalConfig',
-        meta: { title: '全局配置', id: '2-4' },
+        meta: { title: '数据字典配置', id: '2-4' },
         component: () => import('@pages/systemConfig/globalConfig/index.vue'),
       },
     ],

@@ -18,4 +18,12 @@ const deleteUserAPI = (id: number): AxiosPromise<IResult<Record<string, any>>> =
   });
 };
 
-export { getUserListAPI, deleteUserAPI };
+const updateUserAPI = (params: { id: number; userName: string }) => {
+  return service({
+    url: '/userinfo',
+    method: 'POST',
+    data: params,
+  });
+};
+
+export { getUserListAPI, deleteUserAPI, updateUserAPI };
