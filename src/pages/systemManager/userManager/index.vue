@@ -4,10 +4,10 @@
       <el-row class="search-row">
         <el-col class="el-col" :span="6">
           <span class="label">用户名</span>
-          <el-input v-model="userName" placeholder="请输入"></el-input>
+          <el-input v-model="queryParam.userName" placeholder="请输入"></el-input>
         </el-col>
         <el-col class="el-col" :span="6">
-          <el-button type="primary" @click="getDataList(1, { userName: userName })">查询</el-button>
+          <el-button type="primary" @click="getDataList(1)">查询</el-button>
           <el-button @click="resetQuery">重置</el-button>
         </el-col>
       </el-row>
@@ -33,7 +33,6 @@
       <div class="pagination">
         <el-pagination
           layout="total, sizes, prev, pager, next"
-          small
           background
           :currentPage="pageVO.pageNumber"
           :page-size="pageVO.pageSize"
@@ -49,30 +48,28 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
-import userDialog from './components/userDialog.vue';
+import { ref, onMounted, reactive } from 'vue';
+import { confirmMessageBox, deleteSingleData } from '@utils/index';
+import { usePageQuery } from '@hooks/index';
 import { ElMessage } from 'element-plus';
 import { IUser } from './interface';
 import { getUserListAPI, deleteUserAPI } from './api';
-import { confirmMessageBox } from '@utils/index';
-import { usePageQuery } from '../../../hooks';
+
+import userDialog from './components/userDialog.vue';
 
 const visible = ref(false);
 const currentRow = ref<IUser>({} as IUser);
-const userName = ref('');
-const { loading, pageVO, dataList, getDataList, currentChange, sizeChange } = usePageQuery<IUser>(getUserListAPI);
+const queryParam = reactive({
+  userName: '',
+});
+const { loading, pageVO, dataList, getDataList, currentChange, sizeChange, resetQuery } = usePageQuery<IUser>(
+  getUserListAPI,
+  queryParam
+);
 
 const deleteUser = (row: IUser) => {
-  confirmMessageBox(`确认删除用户：${row.userName}？`).then(() => {
-    deleteUserAPI(row.id).then(res => {
-      const { code, success } = res.data;
-      if (code === 200 && success) {
-        ElMessage.success({
-          message: '删除成功！',
-        });
-        getDataList();
-      }
-    });
+  deleteSingleData(row.id, deleteUserAPI, `确认删除用户：${row.userName}?`).then(() => {
+    getDataList();
   });
 };
 
@@ -81,13 +78,7 @@ const showDialog = (row: IUser) => {
   currentRow.value = row;
 };
 
-const resetQuery = () => {
-  userName.value = '';
-  pageVO.pageNumber = 1;
-  getDataList(1);
-};
-
 onMounted(() => {
-  getDataList(1, { userName: userName.value });
+  getDataList(1);
 });
 </script>

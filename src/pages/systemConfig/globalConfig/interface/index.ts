@@ -1,7 +1,7 @@
 import { ITableCommon } from '@interface/index';
 
 export interface IDicConfig extends ITableCommon {
-  id: number;
+  id?: number;
   code: string; // 配置编码
   codeCn: string; // 中文名称
   codeEn: string; // 英文名称

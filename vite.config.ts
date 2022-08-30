@@ -49,6 +49,7 @@ export default defineConfig(({ mode }) => {
         '@interface': path.resolve(__dirname, 'src/interface'),
         '@utils': path.resolve(__dirname, 'src/utils'),
         '@service': path.resolve(__dirname, 'src/service'),
+        '@hooks': path.resolve(__dirname, 'src/hooks'),
       },
     },
     css: {

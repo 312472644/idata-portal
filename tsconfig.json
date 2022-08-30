@@ -19,7 +19,8 @@
       "@utils/*":["./src/utils/*"],
       "@interface/*":["./src/interface/*"],
       "@assets/*":["./src/assets/*"],
-      "@service/*":["./src/service"]
+      "@service/*":["./src/service/*"],
+      "@hooks/*":["./src/hooks/*"]
     },
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

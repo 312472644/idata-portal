@@ -1,6 +1,7 @@
 import { markRaw } from 'vue';
 import { ElMessageBox, ElMessageBoxOptions } from 'element-plus';
 import { QuestionFilled } from '@element-plus/icons-vue';
+import { AxiosPromise } from 'axios';
 
 /**
  * 获取url请求参数
@@ -57,4 +58,44 @@ const nativePageJump = (url: string) => {
   const origin = location.origin;
   window.location.href = `${origin}/#/${url}`;
 };
-export { getUrlParams, geCachetUserInfo, confirmMessageBox, nativePageJump };
+
+/**
+ * 删除单条数据
+ *
+ * @param {number} id 主键id
+ * @param {(id: number) => AxiosPromise<any>} deleteApi 删除接口
+ * @param {string} [message='确认删除该条数据?']
+ * @return {*}  {Promise<Boolean>}
+ */
+const deleteSingleData = (
+  id: number,
+  deleteApi: (id: number) => AxiosPromise<any>,
+  message = '确认删除该条数据?'
+): Promise<Boolean> => {
+  return new Promise(resolve => {
+    confirmMessageBox(message).then(() => {
+      deleteApi(id).then(res => {
+        const { code, success } = res.data;
+        if (code === 200 && success) {
+          resolve(true);
+        }
+      });
+    });
+  });
+};
+
+/**
+ * 设置表单数据
+ *
+ * @param {{ [x: string]: any }} targetData
+ * @param {(Record<string, any> | undefined)} sourceData
+ */
+const setFormField = (targetData: { [x: string]: any }, sourceData: Record<string, any> | undefined) => {
+  const propList = Object.keys(targetData);
+  for (const fieldProp in sourceData) {
+    if (propList.includes(fieldProp)) {
+      targetData[fieldProp] = sourceData[fieldProp];
+    }
+  }
+};
+export { getUrlParams, geCachetUserInfo, confirmMessageBox, nativePageJump, deleteSingleData, setFormField };

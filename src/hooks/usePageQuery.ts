@@ -7,10 +7,15 @@ import { reactive, ref } from 'vue';
  *
  * @return {*}
  */
-const usePageQuery = <T>(api: (params: IQuery<any>) => AxiosPromise<IResultPageVO<any>>) => {
+const usePageQuery = <T>(
+  api: (params: IQuery<any>) => AxiosPromise<IResultPageVO<any>>,
+  queryParam: { [prop: string]: any }
+) => {
   const dataList = ref<T[]>([]);
   // 表格loading
   const loading = ref(false);
+  // 查询条件
+  const condition = reactive(queryParam);
   // 分页对象
   const pageVO = reactive<IPagination>({
     pageNumber: 1,
@@ -18,10 +23,10 @@ const usePageQuery = <T>(api: (params: IQuery<any>) => AxiosPromise<IResultPageV
     total: 0,
   });
   // 获取查询条件
-  const getQueryParam = (condition: any): IQuery<any> => {
+  const getQueryParam = (): IQuery<any> => {
     const { pageSize, pageNumber } = pageVO;
     return {
-      condition: condition,
+      condition,
       page: {
         pageNumber,
         pageSize,
@@ -29,11 +34,10 @@ const usePageQuery = <T>(api: (params: IQuery<any>) => AxiosPromise<IResultPageV
     };
   };
   // 获取列表数据
-  const getDataList = (pageNumber?: number, condition?: any) => {
+  const getDataList = (pageNumber?: number) => {
     loading.value = true;
     pageVO.pageNumber = pageNumber || pageVO.pageNumber;
-    const params = getQueryParam(condition);
-    api(params)
+    api(getQueryParam())
       .then(res => {
         const { data } = res.data;
         dataList.value = data.list;
@@ -53,7 +57,17 @@ const usePageQuery = <T>(api: (params: IQuery<any>) => AxiosPromise<IResultPageV
     pageVO.pageSize = pageSize;
     getDataList(1);
   };
-  return { loading, pageVO, dataList, getDataList, currentChange, sizeChange };
+
+  // 重置查询
+  const resetQuery = () => {
+    for (const prop in condition) {
+      condition[prop] = '';
+    }
+    pageVO.pageNumber = 1;
+    getDataList(1);
+  };
+
+  return { loading, pageVO, dataList, getDataList, currentChange, sizeChange, resetQuery };
 };
 
 export default usePageQuery;
