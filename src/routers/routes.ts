@@ -18,6 +18,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@pages/taskManager/taskList/index.vue'),
       },
       {
+        path: '/taskManager/taskDetail',
+        meta: { title: '任务详情', id: '1-1-1', hidden: true },
+        component: () => import('@pages/taskManager/taskDetail/index.vue'),
+      },
+      {
         path: '/taskManager/executionRecord',
         meta: { title: '执行记录', id: '1-2' },
         component: () => import('@pages/taskManager/executionRecord/index.vue'),

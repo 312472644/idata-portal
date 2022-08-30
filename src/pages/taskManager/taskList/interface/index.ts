@@ -1,7 +1,7 @@
 import { ITableCommon } from '@interface/index';
 
 export interface ITask extends ITableCommon {
-  id: number;
+  id?: number;
   taskName: string;
   taskStatus: string;
   executePlan: string; // 执行计划(corn表达式) 或者下拉 多少分钟一次
@@ -9,8 +9,8 @@ export interface ITask extends ITableCommon {
   timeStampField: string; // 时间戳字段
   localStorage: string; // 本地存储：是/否
   storageTime: string; // 本地保存时长 单位(月) 0永不过期
-  lastExecuteNo: string; // 最后执行批次
-  lastExecuteTime: string; //最后执行时间 yyyy-MM-dd HH:mm:ss
+  lastExecuteNo?: string; // 最后执行批次
+  lastExecuteTime?: string; //最后执行时间 yyyy-MM-dd HH:mm:ss
 }
 
 export interface ITaskFieldMapping extends ITableCommon {

@@ -32,11 +32,23 @@ export default defineConfig(({ mode }) => {
           target: 'http://120.79.230.22:20112/diBus',
           changeOrigin: true,
         },
-        '/datasource/': {
+        '/datasource': {
           target: 'http://120.79.230.22:20112/diBus',
           changeOrigin: true,
         },
-        '/sysconfig/': {
+        '/sysconfig': {
+          target: 'http://120.79.230.22:20112/diBus',
+          changeOrigin: true,
+        },
+        '/task': {
+          target: 'http://120.79.230.22:20112/diBus',
+          changeOrigin: true,
+        },
+        '/rule': {
+          target: 'http://120.79.230.22:20112/diBus',
+          changeOrigin: true,
+        },
+        '/license': {
           target: 'http://120.79.230.22:20112/diBus',
           changeOrigin: true,
         },

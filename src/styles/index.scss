@@ -30,7 +30,7 @@ li {
     }
   }
 }
-.grid-box {
+.grid-box:not(:first-of-type) {
   margin-top: 15px;
 }
 .pagination {
@@ -51,6 +51,12 @@ li {
   .el-link__inner {
     font-size: 12px;
   }
+}
+
+.overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 ::-webkit-scrollbar {

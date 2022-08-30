@@ -3,7 +3,7 @@ import { ITableCommon } from '@interface/index';
 export interface IExecRecord extends ITableCommon {
   id: number;
   batchNo: string; // 执行批次
-  taskId: string; // 执行批次
+  taskId: string; // 任务id
   taskStepId: number; // 任务步骤id
   status: string;
   readDataStartTime: string; // 读取数据开始时间

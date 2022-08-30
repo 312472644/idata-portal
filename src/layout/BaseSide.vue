@@ -7,9 +7,11 @@
             <span :class="['icon', 'iconfont', item?.meta?.icon]"></span>
             <span class="menu-title">{{ item?.meta?.title }}</span>
           </template>
-          <el-menu-item :index="subItem.path" v-for="subItem in item.children" :key="subItem.path">
-            {{ subItem?.meta?.title }}
-          </el-menu-item>
+          <div v-for="subItem in item.children" :key="subItem.path">
+            <el-menu-item v-if="!subItem?.meta?.hidden" :index="subItem.path" :key="subItem.path">
+              {{ subItem?.meta?.title }}
+            </el-menu-item>
+          </div>
         </el-sub-menu>
       </div>
     </el-menu>

@@ -49,6 +49,7 @@ const usePageQuery = <T>(
   };
   // 分页查询
   const currentChange = (pageNumber: number) => {
+    console.log('pageNumber', pageNumber);
     pageVO.pageNumber = pageNumber;
     getDataList();
   };

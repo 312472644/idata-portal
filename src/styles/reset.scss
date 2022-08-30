@@ -66,3 +66,14 @@
     background: linear-gradient(30deg, #4767d9, #5878e7, #5b7bea);
   }
 }
+
+.el-link {
+  .el-link__inner {
+    font-size: 12px;
+  }
+}
+
+.el-breadcrumb {
+  display: flex;
+  align-items: center;
+}
