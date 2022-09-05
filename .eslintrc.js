@@ -51,5 +51,12 @@ module.exports = {
         includeExports: true
       }
     ],
+    'comma-dangle': ['off', {
+      'arrays': 'off',
+      'objects': 'off',
+      'imports': 'off',
+      'exports': 'off',
+      'functions': 'off'
+    }]
   }
 };

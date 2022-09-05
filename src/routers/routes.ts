@@ -41,14 +41,14 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/systemConfig',
-    redirect: '/systemConfig/autConfig',
+    redirect: '/systemConfig/authConfig',
     meta: { title: '系统配置', icon: 'icon-system', id: '2' },
     component: Layout,
     children: [
       {
-        path: '/systemConfig/autConfig',
+        path: '/systemConfig/authConfig',
         meta: { title: '认证配置', id: '2-1' },
-        component: () => import('@pages/systemConfig/autConfig/index.vue'),
+        component: () => import('@pages/systemConfig/authConfig/index.vue'),
       },
       {
         path: '/systemConfig/dataSourceConfig',
@@ -68,7 +68,7 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
-    path: '/systemManager/autConfig',
+    path: '/systemManager/authConfig',
     meta: { title: '系统管理', icon: 'icon-set', id: '3' },
     component: Layout,
     children: [

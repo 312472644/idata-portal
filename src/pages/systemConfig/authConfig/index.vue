@@ -26,20 +26,20 @@
         <el-table-column prop="password" label="密码" min-width="150px" />
         <el-table-column prop="dbSchema" label="dbSchema" min-width="150px" />
         <el-table-column prop="dbVersion" label="数据库版本" min-width="150px" />
-        <el-table-column prop="requestAddress" label="API请求地址" min-width="150px" />
+        <el-table-column prop="requestAddress" label="API请求地址" min-width="150px" :show-overflow-tooltip="true" />
         <el-table-column prop="requestMethod" label="API请求方式" min-width="150px" />
-        <el-table-column prop="requestBody" label="API请求参数" min-width="150px" />
-        <el-table-column prop="requestHeader" label="API请求头" min-width="150px" />
+        <el-table-column prop="requestBody" label="API请求参数" min-width="150px" :show-overflow-tooltip="true" />
+        <el-table-column prop="requestHeader" label="API请求头" min-width="150px" :show-overflow-tooltip="true" />
         <el-table-column prop="connectionTimeout" label="API请求超时时长" min-width="150px" />
         <el-table-column prop="retryCount" label="API请求重试次数" min-width="150px" />
-        <el-table-column prop="responseOkPath" label="响应成功路径" min-width="150px" />
-        <el-table-column prop="responseOkMark" label="响应成功标识" min-width="150px" />
-        <el-table-column prop="responseDataPath" label="响应数据路径" min-width="150px" />
+        <el-table-column prop="responseOkPath" label="响应成功路径" min-width="150px" :show-overflow-tooltip="true" />
+        <el-table-column prop="responseOkMark" label="响应成功标识" min-width="150px" :show-overflow-tooltip="true" />
+        <el-table-column prop="responseDataPath" label="响应数据路径" min-width="150px" :show-overflow-tooltip="true" />
         <el-table-column prop="createdBy" label="创建人" min-width="150px" />
         <el-table-column prop="createdDate" label="创建时间" min-width="150px" />
         <el-table-column prop="updatedBy" label="更新人" min-width="150px" />
         <el-table-column prop="updatedDate" label="更新时间" min-width="150px" />
-        <el-table-column width="80">
+        <el-table-column width="80" label="操作">
           <template #default="scope">
             <div class="grid-column-operation">
               <el-link type="primary" :underline="false" @click="showDialog('Edit', scope.row)">编辑</el-link>
@@ -61,6 +61,12 @@
         />
       </div>
     </card>
+    <auth-config-dialog
+      v-model:visible="dialog.visible"
+      :open-type="dialog.openType"
+      :current-row="dialog.currentRow"
+      @submit-success="getDataList(1)"
+    />
   </div>
 </template>
 <script lang="ts" setup>
@@ -68,6 +74,7 @@ import { onMounted, reactive } from 'vue';
 import { getDsAuthListAPI, deleteDsAuthAPI } from './api';
 import usePageQuery from '@hooks/usePageQuery';
 import { deleteSingleData } from '@utils/index';
+import authConfigDialog from './components/authConfigDialog.vue';
 
 const queryParam = reactive({
   authName: '',

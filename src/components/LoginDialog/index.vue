@@ -23,7 +23,6 @@ import useState from '@hooks/useState';
 
 const store = useStore();
 const { isTokenTimeout } = useState('common', ['isTokenTimeout']);
-console.log('isTokenTimeout', isTokenTimeout);
 const dialogVisible = ref(isTokenTimeout);
 const loginForm = reactive({
   userName: '',

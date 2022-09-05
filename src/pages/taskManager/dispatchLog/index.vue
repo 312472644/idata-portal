@@ -12,8 +12,11 @@
         <el-table-column prop="status" label="状态" />
         <el-table-column prop="lastExecuteNo" label="最后执行批次" />
         <el-table-column prop="lastExecuteTime" label="最后执行时间" />
+        <el-table-column prop="createdBy" label="创建人" />
         <el-table-column prop="createdDate" label="创建时间" />
-        <el-table-column width="120">
+        <el-table-column prop="updatedBy" label="更新人" />
+        <el-table-column prop="updatedDate" label="更新时间" />
+        <el-table-column width="80" label="操作">
           <!-- <template #default="scope">
             <div class="grid-column-operation">
               <el-link type="primary" :underline="false" @click="showDialog('Edit', scope.row)">编辑</el-link>

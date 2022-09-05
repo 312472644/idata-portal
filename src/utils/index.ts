@@ -2,7 +2,6 @@ import { markRaw } from 'vue';
 import { ElMessageBox, ElMessageBoxOptions } from 'element-plus';
 import { QuestionFilled } from '@element-plus/icons-vue';
 import { AxiosPromise } from 'axios';
-import store from '../store';
 
 /**
  * 获取url请求参数

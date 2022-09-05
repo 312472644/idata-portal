@@ -21,7 +21,7 @@
         <el-table-column prop="failTimes" label="失败次数" />
         <el-table-column prop="createdBy" label="创建人" />
         <el-table-column prop="createdDate" label="创建时间" />
-        <el-table-column width="120">
+        <el-table-column width="80" label="操作">
           <template #default="scope">
             <div class="grid-column-operation">
               <el-link type="primary" :underline="false" @click="showDialog(scope.row)">编辑</el-link>

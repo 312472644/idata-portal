@@ -13,39 +13,47 @@
       </el-row>
     </card>
     <card class="grid-box">
-      <card class="grid-box">
-        <div class="grid-operation">
-          <el-button type="primary" @click="showDialog('Add')">新增License</el-button>
-        </div>
-        <el-table :data="dataList" key="id" :border="true" v-loading="loading" element-loading-text="加载中...">
-          <el-table-column type="selection" width="55" />
-          <el-table-column prop="license" label="license" />
-          <el-table-column prop="hostInfo" label="主机信息" :show-overflow-tooltip="true" />
-          <el-table-column prop="status" label="状态" />
-          <el-table-column prop="effDate" label="受影响时间" />
-          <el-table-column width="80">
-            <template #default="scope">
-              <div class="grid-column-operation">
-                <el-link type="primary" :underline="false" @click="showDialog('Edit', scope.row)">编辑</el-link>
-                <el-link type="danger" :underline="false" @click="deleteTask(scope.row.id)">删除</el-link>
-              </div>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="pagination">
-          <el-pagination
-            layout="total, sizes, prev, pager, next"
-            background
-            :currentPage="pageVO.pageNumber"
-            :page-size="pageVO.pageSize"
-            :page-sizes="[10, 20, 50, 100]"
-            :total="pageVO.total"
-            @current-change="currentChange"
-            @size-change="sizeChange"
-          />
-        </div>
-      </card>
+      <div class="grid-operation">
+        <el-button type="primary" @click="showDialog('Add')">新增License</el-button>
+      </div>
+      <el-table :data="dataList" key="id" :border="true" v-loading="loading" element-loading-text="加载中...">
+        <el-table-column type="selection" width="55" />
+        <el-table-column prop="license" label="license" />
+        <el-table-column prop="hostInfo" label="主机信息" :show-overflow-tooltip="true" />
+        <el-table-column prop="status" label="状态" />
+        <el-table-column prop="effDate" label="受影响时间" />
+        <el-table-column prop="createdBy" label="创建人" />
+        <el-table-column prop="createdDate" label="创建时间" />
+        <el-table-column prop="updatedBy" label="更新人" />
+        <el-table-column prop="updatedDate" label="更新时间" />
+        <el-table-column width="80" label="操作">
+          <template #default="scope">
+            <div class="grid-column-operation">
+              <el-link type="primary" :underline="false" @click="showDialog('Edit', scope.row)">编辑</el-link>
+              <el-link type="danger" :underline="false" @click="deleteTask(scope.row.id)">删除</el-link>
+            </div>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="pagination">
+        <el-pagination
+          layout="total, sizes, prev, pager, next"
+          background
+          :currentPage="pageVO.pageNumber"
+          :page-size="pageVO.pageSize"
+          :page-sizes="[10, 20, 50, 100]"
+          :total="pageVO.total"
+          @current-change="currentChange"
+          @size-change="sizeChange"
+        />
+      </div>
     </card>
+    <license-dialog
+      v-model:visible="dialog.visible"
+      :open-type="dialog.openType"
+      :current-row="dialog.currentRow"
+      @submit-success="getDataList(1)"
+    />
   </div>
 </template>
 <script lang="ts" setup>
@@ -53,6 +61,8 @@ import { onMounted, reactive } from 'vue';
 import { getLicenseListAPI, deleteLicenseAPI } from './api';
 import usePageQuery from '@hooks/usePageQuery';
 import { deleteSingleData } from '@utils/index';
+import { ILicense } from './interface';
+import licenseDialog from './components/licenseDialog.vue';
 
 const queryParam = reactive({
   license: '',
@@ -67,7 +77,7 @@ const { resetQuery, getDataList, loading, dataList, pageVO, currentChange, sizeC
   queryParam
 );
 
-const showDialog = (openType: string, currentRow = {} as any) => {
+const showDialog = (openType: string, currentRow = {} as ILicense) => {
   dialog.openType = openType;
   dialog.visible = true;
   dialog.currentRow = { ...currentRow };

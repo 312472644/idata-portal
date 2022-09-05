@@ -1,7 +1,7 @@
 import { ITableCommon } from '@interface/index';
 
 export interface IAutConfig extends ITableCommon {
-  id: number;
+  id?: number;
   authName: string; // 认证名称
   authType: string; //数据源认证类型
   status: string;

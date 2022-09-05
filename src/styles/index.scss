@@ -53,6 +53,13 @@ li {
   }
 }
 
+.select-full-width {
+  width: 100% !important;
+  .el-input__wrapper {
+    width: 100%;
+  }
+}
+
 .overflow {
   overflow: hidden;
   text-overflow: ellipsis;
