@@ -33,6 +33,7 @@ declare module '@vue/runtime-core' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     Loading: typeof import('element-plus/es')['ElLoadingDirective']
+    LoginDialog: typeof import('./src/components/LoginDialog/index.vue')['default']
     NotFound: typeof import('./src/components/NotFound/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

@@ -1,20 +1,20 @@
 interface IState {
   menuCollapse: boolean;
-  title: string;
+  isTokenTimeout: boolean;
 }
 
 export default {
   namespace: true,
   state: {
     menuCollapse: false,
-    title: 'roleName',
+    isTokenTimeout: false,
   },
   mutations: {
-    changeNavList(state: IState, payload: any) {
-      state.title = payload;
-    },
     changeMenuCollapse(state: IState, payload: boolean) {
       state.menuCollapse = payload;
+    },
+    changeIsTokenTimeout(state: IState, payload: boolean) {
+      state.isTokenTimeout = payload;
     },
   },
   actions: {},

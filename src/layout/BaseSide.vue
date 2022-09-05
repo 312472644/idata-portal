@@ -33,6 +33,7 @@ const dyStyle = ref<string>('height:100vh;');
 watch(
   route,
   newValue => {
+    document.title = newValue.meta?.title as string;
     activeMenu.value = newValue.path;
   },
   { immediate: true }

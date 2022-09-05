@@ -11,6 +11,7 @@
       </router-view>
     </div>
   </section>
+  <login-dialog />
 </template>
 
 <script setup lang="ts">

@@ -1,11 +1,16 @@
 import { nativePageJump } from '@utils/index';
 import { AxiosResponse } from 'axios';
 import { ElMessageBox } from 'element-plus';
+import store from '../store';
 
 const redirectLogin = (code: number, message: string) => {
-  // token失效、错误、缺失会跳转值登录页面
-  if ([40101, 40102, 40103, 40104].includes(code)) {
+  // token错误、缺失会跳转值登录页面
+  if ([40101, 40102, 40103].includes(code)) {
     nativePageJump(`login?referrer=${encodeURIComponent(location.href)}`);
+  }
+  // token失效显示登录弹框
+  else if (code === 40104) {
+    store.commit('changeIsTokenTimeout', true);
   } else {
     ElMessageBox.alert(message, '错误', {
       type: 'error',
