@@ -45,18 +45,12 @@ module.exports = {
     'no-dupe-args': 'error',
     'no-unused-vars': 'off',
     '@typescript-eslint/ban-types': 'off',
+    'comma-dangle': 'off',
     'no-duplicate-imports': [
       1,
       {
         includeExports: true
       }
-    ],
-    'comma-dangle': ['off', {
-      'arrays': 'off',
-      'objects': 'off',
-      'imports': 'off',
-      'exports': 'off',
-      'functions': 'off'
-    }]
+    ]
   }
 };

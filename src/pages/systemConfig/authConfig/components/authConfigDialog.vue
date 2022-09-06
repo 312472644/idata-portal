@@ -27,6 +27,8 @@
               </el-form-item>
             </el-col>
           </el-row>
+        </category>
+        <category title="数据库信息">
           <el-row>
             <el-col :span="12">
               <el-form-item label="状态" prop="status">
@@ -257,7 +259,7 @@ const submit = () => {
     align-items: center;
   }
   .el-row {
-    :deep .el-col:not(:last-of-type) {
+    :deep .el-col:first-of-type {
       padding-right: 15px;
     }
   }

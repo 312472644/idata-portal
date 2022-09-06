@@ -14,7 +14,7 @@
     </card>
     <card class="grid-box">
       <div class="grid-operation">
-        <el-button type="primary" @click="showDialog('Add')">新增任务</el-button>
+        <el-button type="primary" @click="createTask">创建任务</el-button>
       </div>
       <el-table :data="dataList" key="id" :border="true" v-loading="loading" element-loading-text="加载中...">
         <el-table-column type="selection" width="55" />
@@ -50,7 +50,7 @@
         <el-table-column width="80" label="操作">
           <template #default="scope">
             <div class="grid-column-operation">
-              <el-link type="primary" :underline="false" @click="showDialog('Edit', scope.row)">编辑</el-link>
+              <el-link type="primary" :underline="false" @click="editTask(scope.row.id)">编辑</el-link>
               <el-link type="danger" :underline="false" @click="deleteTask(scope.row.id)">删除</el-link>
             </div>
           </template>
@@ -69,41 +69,23 @@
         />
       </div>
     </card>
-    <task-dialog
-      v-model:visible="dialog.visible"
-      :open-type="dialog.openType"
-      :current-row="dialog.currentRow"
-      @submit-success="getDataList(1)"
-    ></task-dialog>
   </div>
 </template>
 <script lang="ts" setup>
 import { onMounted, reactive } from 'vue';
-import { useRouter } from 'vue-router';
+import { LocationQueryRaw, useRouter } from 'vue-router';
 import { getTaskListAPI, deleteTaskAPI } from './api';
 import usePageQuery from '@hooks/usePageQuery';
 import { deleteSingleData } from '@utils/index';
-import taskDialog from './components/taskDialog.vue';
 
 const router = useRouter();
 const queryParam = reactive({
-  taskName: '',
-});
-const dialog = reactive({
-  visible: false,
-  openType: 'Add',
-  currentRow: {},
+  taskName: ''
 });
 const { resetQuery, getDataList, loading, dataList, pageVO, currentChange, sizeChange } = usePageQuery(
   getTaskListAPI,
   queryParam
 );
-
-const showDialog = (openType: string, currentRow = {} as any) => {
-  dialog.openType = openType;
-  dialog.visible = true;
-  dialog.currentRow = { ...currentRow };
-};
 
 const deleteTask = (id: number) => {
   deleteSingleData(id, deleteTaskAPI).then(() => {
@@ -115,9 +97,24 @@ const toDetailPage = (id: number) => {
   router.push({
     path: '/taskManager/taskDetail',
     query: {
-      id,
-    },
+      id
+    }
   });
+};
+
+const toCreateTaskPage = (query: LocationQueryRaw) => {
+  router.push({
+    path: '/taskManager/createTask',
+    query
+  });
+};
+
+const createTask = () => {
+  toCreateTaskPage({ active: 1 });
+};
+
+const editTask = (taskId: string) => {
+  toCreateTaskPage({ active: 1, taskId, operationType: 'Edit' });
 };
 
 onMounted(() => {

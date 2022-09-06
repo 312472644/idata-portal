@@ -9,5 +9,6 @@
     "bracketSpacing": true,
     "stylelintIntegration": false,
     "eslintIntegration": false,
-    "tslintIntegration": false
+    "tslintIntegration": false,
+    "trailingComma": "none"
 }

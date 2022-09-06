@@ -14,25 +14,27 @@ export interface ITask extends ITableCommon {
 }
 
 export interface ITaskFieldMapping extends ITableCommon {
-  id: number;
+  id?: number;
+  taskId: number;
   taskStepId: number;
   sourceFieldName: string; // 源字段名称
   sourceFieldType: string; // 源字段类型
   sourceFieldLength: number; // 源字段长度
   targetFieldName: string; // 目标字段名称
   targetFieldLength: number; // 目标字段长度
+  targetFieldType: string; // 目标字段类型
   seqNo: number; // 序号
   changeData: string; // 装换数据：是/否
   changeRule: string; // 装换规则
 }
 
 export interface ITaskStep extends ITableCommon {
-  id: number;
-  taskId: number;
+  id?: number;
+  taskId: string;
   stepName: string; // 步骤名称
-  stepSeq: number; // 步骤序号
+  stepSeq: string; // 步骤序号
   sourceDsType: string; // 源数据源类型
-  sourceDsId: number; // 源数据源id
+  sourceDsId: string; // 源数据源id
   startReadDataTime: string; // 开始读取数据时间
   timeStampField: string; // 时间戳字段
   targetDsType: string; // 目标数据源类型

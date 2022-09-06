@@ -83,3 +83,10 @@
   display: flex;
   align-items: center;
 }
+
+.date-picker {
+  width: 100% !important;
+  .el-input__wrapper {
+    width: 100%;
+  }
+}

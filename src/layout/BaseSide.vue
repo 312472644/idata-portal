@@ -4,7 +4,7 @@
       <div v-for="item in menuList" :key="item.path">
         <el-sub-menu v-if="!item?.meta?.hidden" :index="item.path">
           <template #title>
-            <span :class="['icon', 'iconfont', item?.meta?.icon]"></span>
+            <span :class="['icon', 'iconfont', item.meta?.icon ? item.meta.icon : '']"></span>
             <span class="menu-title">{{ item?.meta?.title }}</span>
           </template>
           <div v-for="subItem in item.children" :key="subItem.path">
@@ -33,8 +33,9 @@ const dyStyle = ref<string>('height:100vh;');
 watch(
   route,
   newValue => {
-    document.title = newValue.meta?.title as string;
-    activeMenu.value = newValue.path;
+    const { title = '数据集成', parentPath } = newValue.meta;
+    document.title = title as string;
+    activeMenu.value = (parentPath || newValue.path) as string;
   },
   { immediate: true }
 );

@@ -23,6 +23,21 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@pages/taskManager/taskDetail/index.vue'),
       },
       {
+        path: '/taskManager/createTask',
+        meta: { title: '创建任务', id: '1-1-2', hidden: true, parentPath: '/taskManager/taskList' },
+        component: () => import('@pages/taskManager/createTask/index.vue'),
+      },
+      {
+        path: '/taskManager/createTaskStep',
+        meta: { title: '创建任务步骤', id: '1-1-3', hidden: true, parentPath: '/taskManager/taskList' },
+        component: () => import('@pages/taskManager/createTask/components/createTaskStep.vue'),
+      },
+      {
+        path: '/taskManager/createFieldMapping',
+        meta: { title: '创建字段映射', id: '1-1-4', hidden: true, parentPath: '/taskManager/taskList' },
+        component: () => import('@pages/taskManager/createTask/components/createFieldMapping.vue'),
+      },
+      {
         path: '/taskManager/executionRecord',
         meta: { title: '执行记录', id: '1-2' },
         component: () => import('@pages/taskManager/executionRecord/index.vue'),
