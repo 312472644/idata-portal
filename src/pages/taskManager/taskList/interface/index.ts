@@ -14,9 +14,9 @@ export interface ITask extends ITableCommon {
 }
 
 export interface ITaskFieldMapping extends ITableCommon {
-  id?: number;
-  taskId: number;
-  taskStepId: number;
+  id?: string;
+  taskId: string;
+  taskStepId: string;
   sourceFieldName: string; // 源字段名称
   sourceFieldType: string; // 源字段类型
   sourceFieldLength: number; // 源字段长度
@@ -29,7 +29,7 @@ export interface ITaskFieldMapping extends ITableCommon {
 }
 
 export interface ITaskStep extends ITableCommon {
-  id?: number;
+  id?: string;
   taskId: string;
   stepName: string; // 步骤名称
   stepSeq: string; // 步骤序号

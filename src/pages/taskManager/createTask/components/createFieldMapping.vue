@@ -86,15 +86,16 @@ const route = useRoute();
 const ruleFormRef = ref<FormInstance>();
 const queryParam = route.query;
 const formData = reactive({
-  taskId: (queryParam?.taskId as string) || 123,
-  taskStepId: (queryParam?.taskStepId as string) || 123,
+  id: '',
+  taskId: queryParam?.taskId as string,
+  taskStepId: queryParam?.taskStepId as string,
   sourceFieldName: '', // 源字段名称
   sourceFieldType: '', // 源字段类型
-  sourceFieldLength: '', // 源字段长度
+  sourceFieldLength: 0, // 源字段长度
   targetFieldName: '', // 目标字段名称
-  targetFieldLength: '', // 目标字段长度
+  targetFieldLength: 0, // 目标字段长度
   targetFieldType: '',
-  seqNo: '', // 序号
+  seqNo: 0, // 序号
   changeData: '', // 装换数据：是/否
   changeRule: '' // 装换规则
 });
@@ -120,12 +121,15 @@ const nextPage = () => {
 
 const getFieldMappingDetail = () => {
   const taskId = queryParam.taskId as string;
-  if (!taskId) {
+  const operationType = queryParam.operationType;
+  if (!taskId || operationType !== 'Edit') {
     return;
   }
   getFieldMappingDetailAPI(taskId).then(res => {
-    const { data = {} } = res.data;
-    setFormField(formData, data);
+    const { data = [] } = res.data;
+    if (data.length > 0) {
+      setFormField(formData, data[0]);
+    }
   });
 };
 
@@ -157,7 +161,7 @@ const updateFieldMapping = () => {
   if (!taskId) {
     return;
   }
-  updateFieldMappingAPI(taskId, formData).then(res => {
+  updateFieldMappingAPI(formData.id, formData).then(res => {
     submitSuccess(res);
   });
 };
@@ -178,7 +182,7 @@ const submit = () => {
 };
 
 onMounted(() => {
-  // getFieldMappingDetail();
+  getFieldMappingDetail();
 });
 </script>
 <style lang="scss" scoped>

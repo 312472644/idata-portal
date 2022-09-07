@@ -93,12 +93,10 @@ const deleteTask = (id: number) => {
   });
 };
 
-const toDetailPage = (id: number) => {
+const toDetailPage = (taskId: number) => {
   router.push({
     path: '/taskManager/taskDetail',
-    query: {
-      id
-    }
+    query: { taskId }
   });
 };
 

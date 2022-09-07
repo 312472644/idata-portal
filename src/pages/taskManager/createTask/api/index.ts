@@ -48,17 +48,27 @@ const updateTaskStepAPI = (id: string, params: ITaskStep): AxiosPromise<IResult<
   });
 };
 
-const getTaskStepDetailAPI = (id: string): AxiosPromise<IResult<ITaskStep>> => {
+const getTaskStepDetailAPI = (taskId: string): AxiosPromise<IResult<ITaskStep[]>> => {
   return service({
-    url: `/task/step/${id}`,
-    method: 'GET'
+    url: '/task/step/list',
+    method: 'POST',
+    data: {
+      condition: {
+        taskId
+      }
+    }
   });
 };
 
-const getFieldMappingDetailAPI = (id: string): AxiosPromise<IResult<ITaskFieldMapping>> => {
+const getFieldMappingDetailAPI = (taskId: string): AxiosPromise<IResult<ITaskFieldMapping[]>> => {
   return service({
-    url: `/task/fieldmapping/${id}`,
-    method: 'GET'
+    url: '/task/fieldmapping/list',
+    method: 'POST',
+    data: {
+      condition: {
+        taskId
+      }
+    }
   });
 };
 

@@ -46,13 +46,13 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <!-- <el-row>
+      <el-row>
         <el-col :span="8">
           <el-form-item prop="timeStampField" label="时间戳字段">
             <el-input v-model="formData.timeStampField" placeholder="请输入"></el-input>
           </el-form-item>
         </el-col>
-      </el-row> -->
+      </el-row>
       <el-row>
         <el-col :span="8">
           <el-form-item prop="targetDsId" label="目标数据源类型">
@@ -108,6 +108,7 @@ const route = useRoute();
 const ruleFormRef = ref<FormInstance>();
 const queryParam = route.query;
 const formData = reactive({
+  id: '',
   taskId: (queryParam?.taskId as string) || '',
   stepName: '',
   stepSeq: '',
@@ -116,7 +117,7 @@ const formData = reactive({
   startReadDataTime: '',
   targetDsType: '',
   targetDsId: '',
-  // timeStampField: '',
+  timeStampField: '',
   updateData: '',
   updateKey: ''
 });
@@ -160,12 +161,15 @@ const targetDsTypeChange = val => {
 
 const getTaskDetail = () => {
   const taskId = queryParam.taskId as string;
-  if (!taskId) {
+  const operationType = queryParam.operationType;
+  if (!taskId || operationType !== 'Edit') {
     return;
   }
   getTaskStepDetailAPI(taskId).then(res => {
-    const { data = {} } = res.data;
-    setFormField(formData, data);
+    const { data = [] } = res.data;
+    if (data.length > 0) {
+      setFormField(formData, data[0]);
+    }
   });
 };
 
@@ -193,7 +197,7 @@ const createTaskStep = () => {
 };
 
 const updateTaskStep = () => {
-  updateTaskStepAPI(formData.taskId, formData).then(res => {
+  updateTaskStepAPI(formData.id, formData).then(res => {
     submitSuccess(res);
   });
 };
@@ -215,7 +219,7 @@ const submit = () => {
 };
 
 onMounted(() => {
-  // getTaskDetail();
+  getTaskDetail();
 });
 </script>
 <style lang="scss" scoped>

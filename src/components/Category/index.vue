@@ -9,8 +9,8 @@
 <script lang="ts" setup>
 const props = defineProps({
   title: {
-    type: String,
-  },
+    type: String
+  }
 });
 </script>
 <style lang="scss" scoped>
@@ -28,7 +28,7 @@ const props = defineProps({
       background: #409eff;
       left: 0;
       bottom: 0;
-      top: 3px;
+      top: 5px;
     }
   }
   .category-body {
