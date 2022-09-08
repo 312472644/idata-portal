@@ -17,9 +17,11 @@ const props = defineProps({
 .category {
   position: relative;
   .category-title {
+    position: relative;
     font-size: 14px;
     font-weight: bold;
     padding-left: 12px;
+    line-height: 15px;
     &::after {
       content: '';
       position: absolute;
@@ -28,7 +30,7 @@ const props = defineProps({
       background: #409eff;
       left: 0;
       bottom: 0;
-      top: 5px;
+      top: 0px;
     }
   }
   .category-body {

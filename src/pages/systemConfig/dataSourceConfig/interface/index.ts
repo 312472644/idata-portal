@@ -1,7 +1,7 @@
 import { ITableCommon } from '@interface/index';
 
 export interface IDSConfig extends ITableCommon {
-  id: number;
+  id?: string;
   dsName: string; // 数据源名称
   dsType: string; // 数据源类型
   dsAuthId: string; // 数据源认证id

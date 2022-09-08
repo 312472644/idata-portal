@@ -41,7 +41,7 @@
         <el-table-column prop="createdDate" label="创建时间" min-width="150px" />
         <el-table-column prop="updatedBy" label="更新人" min-width="150px" />
         <el-table-column prop="updatedDate" label="更新时间" min-width="150px" />
-        <el-table-column width="80" label="操作">
+        <el-table-column width="80" label="操作" fixed="right">
           <template #default="scope">
             <div class="grid-column-operation">
               <el-link type="primary" :underline="false" @click="showDialog('Edit', scope.row)">编辑</el-link>
@@ -63,6 +63,12 @@
         />
       </div>
     </card>
+    <ds-config-dialog
+      v-model:visible="dialog.visible"
+      :open-type="dialog.openType"
+      :current-row="dialog.currentRow"
+      @submit-success="getDataList(1)"
+    />
   </div>
 </template>
 <script lang="ts" setup>
@@ -71,15 +77,16 @@ import { useRouter } from 'vue-router';
 import { getDSConfigListAPI, deleteDSConfigAPI } from './api';
 import usePageQuery from '@hooks/usePageQuery';
 import { deleteSingleData } from '@utils/index';
+import dsConfigDialog from './components/dsConfigDialog.vue';
 
 const router = useRouter();
 const queryParam = reactive({
-  dsName: '',
+  dsName: ''
 });
 const dialog = reactive({
   visible: false,
   openType: 'Add',
-  currentRow: {},
+  currentRow: {}
 });
 const { resetQuery, getDataList, loading, dataList, pageVO, currentChange, sizeChange } = usePageQuery(
   getDSConfigListAPI,
@@ -102,8 +109,8 @@ const toDetailPage = (id: number) => {
   router.push({
     path: '/taskManager/taskDetail',
     query: {
-      id,
-    },
+      id
+    }
   });
 };
 

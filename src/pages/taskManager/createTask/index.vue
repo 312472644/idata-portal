@@ -16,7 +16,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { onMounted, ref, watch, computed } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import createTask from './components/createTask.vue';
 import createTaskStep from './components/createTaskStep.vue';
