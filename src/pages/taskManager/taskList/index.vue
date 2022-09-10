@@ -14,7 +14,7 @@
     </card>
     <card class="grid-box">
       <div class="grid-operation">
-        <el-button type="primary" @click="createTask">创建任务</el-button>
+        <el-button type="primary" @click="createTask" v-permission="['admin']">创建任务</el-button>
       </div>
       <el-table :data="dataList" key="id" :border="true" v-loading="loading" element-loading-text="加载中...">
         <el-table-column type="selection" width="55" />

@@ -5,6 +5,8 @@ import store from './store';
 import installComponents from './components';
 import ElementPlus from 'element-plus';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
+import registerDirectives from './directives';
+
 import 'element-plus/theme-chalk/src/index.scss';
 import './styles/index.scss';
 import './styles/root.scss';
@@ -13,6 +15,7 @@ import './assets/font/iconfont.css';
 
 const app = createApp(App);
 installComponents(app);
+registerDirectives(app);
 app.use(ElementPlus, { locale: zhCn });
 app.use(store as any);
 app.use(Router);
