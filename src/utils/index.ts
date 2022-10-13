@@ -2,6 +2,8 @@ import { markRaw } from 'vue';
 import { ElMessageBox, ElMessageBoxOptions } from 'element-plus';
 import { QuestionFilled } from '@element-plus/icons-vue';
 import { AxiosPromise } from 'axios';
+import service from '@service/index';
+import { IDicConfig } from '@pages/systemConfig/globalConfig/interface';
 
 /**
  * 获取url请求参数
@@ -45,7 +47,7 @@ const confirmMessageBox = (message: string, options?: ElMessageBoxOptions) => {
     type: 'warning',
     cancelButtonText: '取消',
     confirmButtonText: '确认',
-    icon: markRaw(QuestionFilled),
+    icon: markRaw(QuestionFilled)
   });
 };
 
@@ -99,4 +101,37 @@ const setFormField = (targetData: { [x: string]: any }, sourceData: Record<strin
   }
 };
 
-export { getUrlParams, geCachetUserInfo, confirmMessageBox, nativePageJump, deleteSingleData, setFormField };
+/**
+ * 通过字段名称获取配置列表
+ *
+ * @param {string} fieldName 字段名称
+ */
+const getConfigList = async (fieldName: string) => {
+  let configList = [];
+  await service({
+    url: '/sysconfig/list',
+    method: 'POST',
+    data: {
+      condition: { fieldName }
+    }
+  }).then(res => {
+    configList = (res.data.data || []).map((item: IDicConfig) => {
+      return {
+        ...item,
+        label: item.codeCn,
+        value: item.code
+      };
+    });
+  });
+  return configList;
+};
+
+export {
+  getUrlParams,
+  geCachetUserInfo,
+  confirmMessageBox,
+  nativePageJump,
+  deleteSingleData,
+  setFormField,
+  getConfigList
+};

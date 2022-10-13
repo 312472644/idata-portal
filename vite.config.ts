@@ -12,47 +12,48 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
       eslint({
-        throwOnError: true,
+        throwOnError: true
       }),
       Components({
         extensions: ['vue', 'md'],
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
         resolvers: [
           ElementPlusResolver({
-            importStyle: 'sass',
-          }),
-        ],
-      }),
+            importStyle: 'sass'
+          })
+        ]
+      })
     ],
     define: JSON.stringify(env) as any,
     server: {
+      host: '192.168.1.100',
       open: true,
       proxy: {
         '/userinfo': {
           target: 'http://120.79.230.22:20112/diBus',
-          changeOrigin: true,
+          changeOrigin: true
         },
         '/datasource': {
           target: 'http://120.79.230.22:20112/diBus',
-          changeOrigin: true,
+          changeOrigin: true
         },
         '/sysconfig': {
           target: 'http://120.79.230.22:20112/diBus',
-          changeOrigin: true,
+          changeOrigin: true
         },
         '/task': {
           target: 'http://120.79.230.22:20112/diBus',
-          changeOrigin: true,
+          changeOrigin: true
         },
         '/rule': {
           target: 'http://120.79.230.22:20112/diBus',
-          changeOrigin: true,
+          changeOrigin: true
         },
         '/license': {
           target: 'http://120.79.230.22:20112/diBus',
-          changeOrigin: true,
-        },
-      },
+          changeOrigin: true
+        }
+      }
     },
     resolve: {
       alias: {
@@ -61,8 +62,8 @@ export default defineConfig(({ mode }) => {
         '@interface': path.resolve(__dirname, 'src/interface'),
         '@utils': path.resolve(__dirname, 'src/utils'),
         '@service': path.resolve(__dirname, 'src/service'),
-        '@hooks': path.resolve(__dirname, 'src/hooks'),
-      },
+        '@hooks': path.resolve(__dirname, 'src/hooks')
+      }
     },
     css: {
       preprocessorOptions: {
@@ -70,9 +71,9 @@ export default defineConfig(({ mode }) => {
           // eslint-disable-next-line quotes
           additionalData: `
           @use './src/styles/element/index.scss' as *;
-          @use './src/styles/element/var.scss' as *;`,
-        },
-      },
-    },
+          @use './src/styles/element/var.scss' as *;`
+        }
+      }
+    }
   };
 });

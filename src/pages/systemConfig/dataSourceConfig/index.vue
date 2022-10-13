@@ -22,12 +22,12 @@
         <el-table-column prop="dsType" label="数据源类型" min-width="150px" />
         <el-table-column prop="dsAuthId" label="数据源认证ID" min-width="150px" />
         <el-table-column prop="status" label="状态" min-width="150px" />
-        <el-table-column prop="sqlStr" label="sql语句" min-width="150px" />
+        <el-table-column prop="sqlStr" label="sql语句" min-width="150px" :show-overflow-tooltip="true" />
         <el-table-column prop="tableName" label="表名" min-width="150px" />
         <el-table-column prop="requestAddress" label="API请求地址" min-width="150px" />
         <el-table-column prop="requestMethod" label="API请求方式" min-width="150px" />
-        <el-table-column prop="requestBody" label="API请求参数" min-width="150px" />
-        <el-table-column prop="requestHeader" label="API请求头" min-width="150px" />
+        <el-table-column prop="requestBody" label="API请求参数" min-width="150px" :show-overflow-tooltip="true" />
+        <el-table-column prop="requestHeader" label="API请求头" min-width="150px" :show-overflow-tooltip="true" />
         <el-table-column prop="connectionTimeout" label="API请求超时时长" min-width="150px" />
         <el-table-column prop="retryCount" label="API请求重试次数" min-width="150px" />
         <el-table-column prop="responseOkPath" label="响应成功路径" min-width="150px" />
