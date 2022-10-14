@@ -1,6 +1,13 @@
 <template>
   <div class="task-relation-table">
-    <el-table :data="dataList.stepList" default-expand-all :border="true" row-class-name="rowClass">
+    <el-table
+      :data="dataList.stepList"
+      :row-key="row => row.id"
+      :expand-row-keys="expandRowKeys"
+      :border="true"
+      row-class-name="rowClass"
+      @expand-change="expandRows"
+    >
       <el-table-column type="expand">
         <template #default="props">
           <div class="relation-children-table">
@@ -208,6 +215,8 @@ const fieldMappingTemplate = {
   changeRule: ''
 };
 const templateRow = {
+  id: _.uniqueId('uniqueId_'), // 提交需删除
+  isExpand: false, // 提交需删除
   stepName: '',
   stepSeq: '',
   sourceDsId: '',
@@ -222,6 +231,7 @@ const deleteRow = ref({ type: '', rowIndex: 0 });
 const dataList = reactive({
   stepList: [_.cloneDeep(templateRow)]
 });
+const expandRowKeys = reactive([]);
 const sourceDsTypeOptions = reactive([
   { label: '1', value: '1' },
   { label: '2', value: '2' }
@@ -237,7 +247,8 @@ const updateDataOptions = reactive([
 
 const addTaskStep = () => {
   const copyRow = _.cloneDeep(templateRow);
-  dataList.stepList.push(_.cloneDeep(copyRow));
+  copyRow.id = _.uniqueId('uniqueId_');
+  dataList.stepList.push(copyRow);
 };
 
 const cancelDelete = () => {
@@ -262,6 +273,16 @@ const addFieldMapping = row => {
 const deleteFieldMapping = (row, rowIndex) => {
   row.fieldMappingList.splice(rowIndex, 1);
   cancelDelete();
+};
+
+const expandRows = row => {
+  row.isExpand = !row.isExpand;
+  if (row.isExpand) {
+    expandRowKeys.push(row.id);
+  } else {
+    const index = expandRowKeys.findIndex(item => item === row.id);
+    expandRowKeys.splice(index, 1);
+  }
 };
 </script>
 <style lang="scss" scoped>
