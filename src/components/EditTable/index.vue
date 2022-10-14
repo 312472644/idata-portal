@@ -11,7 +11,7 @@
           <el-input v-model="scope.row.propValue" placeholder="请输入"></el-input>
         </template>
       </el-table-column>
-      <el-table-column width="120">
+      <el-table-column width="90">
         <template #default="scope">
           <div class="grid-column-operation">
             <el-link type="primary" :underline="false" @click="addRow">新增</el-link>
@@ -84,6 +84,10 @@ defineExpose({
       color: #1818196b;
       font-weight: normal;
     }
+  }
+  :deep .el-table__header .el-table__cell,
+  :deep .el-table td.el-table__cell {
+    border-right: 1px solid #ebeef5 !important;
   }
 }
 </style>

@@ -275,6 +275,11 @@ const deleteFieldMapping = (row, rowIndex) => {
     font-weight: normal;
   }
 
+  :deep .el-table__header .el-table__cell,
+  :deep .el-table.el-table--border .el-table__cell {
+    border-right: 1px solid #ebeef5 !important;
+  }
+
   :deep .rowClass {
     background: #f5f7fa;
   }
