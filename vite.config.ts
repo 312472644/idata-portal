@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
     ],
     define: JSON.stringify(env) as any,
     server: {
-      host: '192.168.1.100',
+      // host: '192.168.1.100',
       open: true,
       proxy: {
         '/userinfo': {

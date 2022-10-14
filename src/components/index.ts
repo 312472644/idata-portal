@@ -4,13 +4,15 @@ import Card from './Card/index.vue';
 import LoginDialog from './LoginDialog/index.vue';
 import Category from './Category/index.vue';
 import EditTable from './EditTable/index.vue';
+import TaskRelationTable from './TaskRelationTable/index.vue';
 
 const componentMap = {
   ...ElementPlusIconsVue,
   Card,
   LoginDialog,
   Category,
-  EditTable
+  EditTable,
+  TaskRelationTable
 };
 
 // 注册所有组件

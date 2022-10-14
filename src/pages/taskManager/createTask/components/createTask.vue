@@ -83,7 +83,8 @@ const formData = reactive({
   startReadDataTime: '',
   timeStampField: '',
   localStorage: '',
-  storageTime: ''
+  storageTime: '',
+  createdBy: 'xiongxiong'
 });
 const formRules = reactive({
   taskName: [{ required: true, message: '必填', trigger: 'blur' }],

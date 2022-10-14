@@ -1,5 +1,7 @@
 <template>
-  <div>任务监控</div>
+  <card class="grid-box">
+    <task-relation-table></task-relation-table>
+  </card>
 </template>
 <script lang="ts" setup>
 import { onMounted } from 'vue';
